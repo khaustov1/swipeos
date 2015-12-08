@@ -22,8 +22,9 @@ public class PlayerScript implements IScript {
     private TransformComponent    playerTransformComponent; //для получения координат персонажа
     private DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
 
-    private float friction = 0.1f; // трение, чтобы игрок останавливался
-    private Vector2 playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
+    private float     friction = 0.1f; // трение, чтобы игрок останавливался
+    private Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
+    private int       speedLimit = 10000;
 
     boolean isX_AxisNegative; // проверяем направление движения игрока
     boolean isY_AxisNegative; // проверяем направление движения игрока
@@ -94,6 +95,7 @@ public class PlayerScript implements IScript {
     public void act(float delta) {
 
         speedLimit();
+        moveCharacter(delta);
 
         Rectangle playerRectangle = new Rectangle(
                 playerTransformComponent.x,
@@ -123,6 +125,31 @@ public class PlayerScript implements IScript {
             }
         }
 
+        //Коллизия закончилась
+        isCollidingNow = false;
+    }
+
+    @Override
+    public void dispose() {
+
+    }
+
+    private void speedLimit(){
+        if(playerSpeed.y < -speedLimit){
+            playerSpeed.y = -speedLimit;
+        }
+        if(playerSpeed.y > speedLimit){
+            playerSpeed.y = speedLimit;
+        }
+        if(playerSpeed.x < -speedLimit){
+            playerSpeed.x = -speedLimit;
+        }
+        if(playerSpeed.x > speedLimit){
+            playerSpeed.x = speedLimit;
+        }
+    }
+
+    private void moveCharacter(float delta){
         //Двигаем персонажа
         playerTransformComponent.x += playerSpeed.x * delta;
         playerTransformComponent.y += playerSpeed.y * delta;
@@ -140,28 +167,5 @@ public class PlayerScript implements IScript {
         if(playerSpeed.y < 0 && isY_AxisNegative){
             playerSpeed.y += friction;
         }
-
-        //Коллизия закончилась
-        isCollidingNow = false;
-    }
-
-    private void speedLimit(){
-        if(playerSpeed.y < -100){
-            playerSpeed.y = -100;
-        }
-        if(playerSpeed.y > 100){
-            playerSpeed.y = 100;
-        }
-        if(playerSpeed.x < -100){
-            playerSpeed.x = -100;
-        }
-        if(playerSpeed.x > 100){
-            playerSpeed.x = 100;
-        }
-    }
-
-    @Override
-    public void dispose() {
-
     }
 }

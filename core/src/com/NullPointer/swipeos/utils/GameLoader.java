@@ -37,6 +37,7 @@ public class GameLoader {
             Entity blockEntity = itemWrapper.getChild("wall" + i).getEntity();
             TransformComponent blockTransformComponent = blockEntity.getComponent(TransformComponent.class);
             DimensionsComponent blockDimensionComponent = blockEntity.getComponent(DimensionsComponent.class);
+            //Пока так, но это полная хуйня
             if(i >= 3){
                 blockDimensionComponent.height = blockDimensionComponent.height * 100;
             }
