@@ -31,8 +31,8 @@ public class GameLoader {
         game.mainItemWrapper.getChild("player").addScript(new PlayerScript(getLevelBlocks(game.mainItemWrapper, 5)));
     }
 
-    private List<Rectangle> getLevelBlocks(ItemWrapper itemWrapper, int numberOfBlocks){
-        List<Rectangle> blocksList = new ArrayList<Rectangle>();
+    private List<Wall> getLevelBlocks(ItemWrapper itemWrapper, int numberOfBlocks){
+        List<Wall> blocksList = new ArrayList<Wall>();
         for(int i = 0; i < numberOfBlocks; i++){
             Entity blockEntity = itemWrapper.getChild("wall" + i).getEntity();
             TransformComponent blockTransformComponent = blockEntity.getComponent(TransformComponent.class);
@@ -44,11 +44,12 @@ public class GameLoader {
             else {
                 blockDimensionComponent.height = blockDimensionComponent.height / 2;
             }
-            blocksList.add(new Rectangle(
+            blocksList.add(new Wall(
                     blockTransformComponent.x,
                     blockTransformComponent.y,
                     blockDimensionComponent.width,
-                    blockDimensionComponent.height
+                    blockDimensionComponent.height,
+                    false
             ));
         }
 

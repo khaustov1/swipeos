@@ -1,6 +1,7 @@
 package com.NullPointer.swipeos.Scripts;
 
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;
+import com.NullPointer.swipeos.utils.Wall;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
@@ -24,16 +25,16 @@ public class PlayerScript implements IScript {
 
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
     private Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
-    private int       speedLimit = 10000;
+    private int       speedLimit = 150;
 
     boolean isX_AxisNegative; // проверяем направление движения игрока
     boolean isY_AxisNegative; // проверяем направление движения игрока
 
     boolean isCollidingNow; // Флаг для того, чтобы не менять направление игрока во время коллизии
 
-    List<Rectangle> blocksList; // коллекция с препядствиями
+    List<Wall> blocksList; // коллекция с препядствиями
 
-    public PlayerScript(List<Rectangle> blocks){
+    public PlayerScript(List<Wall> blocks){
         this.blocksList = blocks;
     }
 
@@ -105,9 +106,10 @@ public class PlayerScript implements IScript {
 
         // Проверка коллизий
         for(Rectangle block : blocksList){
-            if(playerRectangle.overlaps(block) || playerTransformComponent.y < 0){
+            if(block.overlaps(playerRectangle) || playerTransformComponent.y < 0){
                 //Коллизия началась
                 isCollidingNow = true;
+
                 if(playerSpeed.y > 0){
                     playerTransformComponent.y -= 3;
                 }
@@ -124,7 +126,6 @@ public class PlayerScript implements IScript {
                 playerSpeed.y = - playerSpeed.y;
             }
         }
-
         //Коллизия закончилась
         isCollidingNow = false;
     }
