@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class GameLoader {
     Game game;
+    PlayerScript playerScript;
 
     public GameLoader(Game game){
         this.game = game;
@@ -28,7 +29,8 @@ public class GameLoader {
         game.mainSceneLoader = new SceneLoader();
         game.mainSceneLoader.loadScene("MainScene", game.mainViewPort);
         game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
-        game.mainItemWrapper.getChild("player").addScript(new PlayerScript(getLevelBlocks(game.mainItemWrapper, 5)));
+        playerScript = new PlayerScript(getLevelBlocks(game.mainItemWrapper, 8));
+        game.mainItemWrapper.getChild("player").addScript(playerScript);
     }
 
     private List<Wall> getLevelBlocks(ItemWrapper itemWrapper, int numberOfBlocks){
@@ -37,12 +39,19 @@ public class GameLoader {
             Entity blockEntity = itemWrapper.getChild("wall" + i).getEntity();
             TransformComponent blockTransformComponent = blockEntity.getComponent(TransformComponent.class);
             DimensionsComponent blockDimensionComponent = blockEntity.getComponent(DimensionsComponent.class);
-            //Пока так, но это полная хуйня
-            if(i >= 3){
-                blockDimensionComponent.height = blockDimensionComponent.height * 100;
-            }
-            else {
-                blockDimensionComponent.height = blockDimensionComponent.height / 2;
+            switch (i){
+                case 5:
+                    blockDimensionComponent.width = 250;
+                    break;
+                case 6:
+                    blockDimensionComponent.height = blockDimensionComponent.height * 100;
+                    break;
+                case 7:
+                    blockDimensionComponent.height = blockDimensionComponent.height * 100;
+                    break;
+                default:
+                    blockDimensionComponent.height = blockDimensionComponent.height / 2;
+                    break;
             }
             blocksList.add(new Wall(
                     blockTransformComponent.x,
@@ -54,6 +63,14 @@ public class GameLoader {
         }
 
         return  blocksList;
+    }
+
+    public float getPlayerY(){
+        return playerScript.playerTransformComponent.y;
+    }
+
+    public float getPlayerX(){
+        return playerScript.playerTransformComponent.x;
     }
 
 }

@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class PlayerScript implements IScript {
 
-    private TransformComponent    playerTransformComponent; //для получения координат персонажа
+    public  TransformComponent    playerTransformComponent; //для получения координат персонажа
     private DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
 
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
