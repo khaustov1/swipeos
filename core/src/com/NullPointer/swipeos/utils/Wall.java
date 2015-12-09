@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Wall extends Rectangle {
 
-    private boolean isDeadly; //Умирает ли игрок от соприкосновния со этой стенкой
+    private boolean isDeadly; //Умирает ли игрок от соприкосновения с этой стенкой
 
     public boolean isDeadly() {
         return isDeadly;
