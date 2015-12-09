@@ -44,9 +44,9 @@ public class PlayerScript implements IScript {
         playerTransformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         playerDimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
 
-        // Уменьшаю размер игрока в три раза
-        playerDimensionsComponent.width = playerDimensionsComponent.width / 3;
-        playerDimensionsComponent.height = playerDimensionsComponent.height / 3;
+        // Уменьшаю размер игрока
+        playerDimensionsComponent.width = playerDimensionsComponent.width / 2.8f;
+        playerDimensionsComponent.height = playerDimensionsComponent.height / 2.8f;
 
         // Эта штука для отлова жестов свайпа, обработка в классе DirectionGestureDetector.class
 

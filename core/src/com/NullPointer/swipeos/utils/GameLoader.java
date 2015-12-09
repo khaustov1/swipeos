@@ -40,6 +40,10 @@ public class GameLoader {
             TransformComponent blockTransformComponent = blockEntity.getComponent(TransformComponent.class);
             DimensionsComponent blockDimensionComponent = blockEntity.getComponent(DimensionsComponent.class);
             switch (i){
+                case 3:
+                    blockDimensionComponent.width = 20;
+                    blockDimensionComponent.height = 100;
+                    break;
                 case 5:
                     blockDimensionComponent.width = 250;
                     break;

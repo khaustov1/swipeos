@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 backgorund
   rotate: false
-  xy: 2, 531
+  xy: 2, 511
   size: 720, 1280
   orig: 720, 1280
   offset: 0, 0
@@ -14,13 +14,13 @@ backgorund
 player
   rotate: false
   xy: 2, 132
-  size: 397, 397
-  orig: 397, 397
+  size: 377, 377
+  orig: 377, 377
   offset: 0, 0
   index: -1
 portal
   rotate: false
-  xy: 724, 1555
+  xy: 724, 1535
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
