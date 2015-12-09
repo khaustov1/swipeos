@@ -65,6 +65,13 @@ public class GameLoader {
         return  blocksList;
     }
 
+    public void initLevel(int level){
+        //Todo: Сделать реализацию загрузки уровня
+        //Для того, чтобы начать загрузку нового уровня, необходимо очистить движок
+        game.mainSceneLoader.getEngine().removeAllEntities();
+
+    }
+
     public float getPlayerY(){
         return playerScript.playerTransformComponent.y;
     }

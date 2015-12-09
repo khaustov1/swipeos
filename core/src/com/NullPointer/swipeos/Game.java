@@ -14,7 +14,9 @@ import com.uwsoft.editor.renderer.utils.ItemWrapper;
 public class Game extends com.badlogic.gdx.Game {
 	public  Viewport       mainViewPort;
     public  SceneLoader    mainSceneLoader;
-    public ItemWrapper     mainItemWrapper;
+    public  ItemWrapper    mainItemWrapper;
+	private boolean        markForNewLevel;
+	private int            currLevelNum;
 
     private GameLoader gameLoader;
 	
@@ -29,6 +31,13 @@ public class Game extends com.badlogic.gdx.Game {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
+
+		//Если нужно загрузить новый уровень
+		if(markForNewLevel) {
+			gameLoader.initLevel(currLevelNum);
+			markForNewLevel = false;
+		}
+
         setCamera();
 	}
 
