@@ -20,59 +20,36 @@ public class GameLoader {
     Game game;
     PlayerScript playerScript;
 
+    int currentLevel = 1;
+
     public GameLoader(Game game){
         this.game = game;
     }
 
     public void initialize(){
-        game.mainViewPort = new FitViewport(240,426);
+        game.mainViewPort = new FitViewport(360,640);
         game.mainSceneLoader = new SceneLoader();
         game.mainSceneLoader.loadScene("MainScene", game.mainViewPort);
         game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
-        playerScript = new PlayerScript(getLevelBlocks(game.mainItemWrapper, 8));
+        //// TODO: добавить загрузку последнего уровня для игрока
+        playerScript = new PlayerScript(BlocksLevelLoader.getLevelBlocks(game.mainItemWrapper, currentLevel), this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
     }
 
-    private List<Wall> getLevelBlocks(ItemWrapper itemWrapper, int numberOfBlocks){
-        List<Wall> blocksList = new ArrayList<Wall>();
-        for(int i = 0; i < numberOfBlocks; i++){
-            Entity blockEntity = itemWrapper.getChild("wall" + i).getEntity();
-            TransformComponent blockTransformComponent = blockEntity.getComponent(TransformComponent.class);
-            DimensionsComponent blockDimensionComponent = blockEntity.getComponent(DimensionsComponent.class);
-            switch (i){
-                case 3:
-                    blockDimensionComponent.width = 20;
-                    blockDimensionComponent.height = 100;
-                    break;
-                case 5:
-                    blockDimensionComponent.width = 250;
-                    break;
-                case 6:
-                    blockDimensionComponent.height = blockDimensionComponent.height * 100;
-                    break;
-                case 7:
-                    blockDimensionComponent.height = blockDimensionComponent.height * 100;
-                    break;
-                default:
-                    blockDimensionComponent.height = blockDimensionComponent.height / 2;
-                    break;
-            }
-            blocksList.add(new Wall(
-                    blockTransformComponent.x,
-                    blockTransformComponent.y,
-                    blockDimensionComponent.width,
-                    blockDimensionComponent.height,
-                    false
-            ));
+
+    public void nextLevel(){
+        ++currentLevel;
+        switch (currentLevel){
+            case 1:
+                break;
+            case 2:
+                playerScript.setGameObjectList(BlocksLevelLoader.getLevelBlocks(game.mainItemWrapper, currentLevel));
+                playerScript.setPlayerСoordinates(820f,10.33f);
+                game.setCameraCoords(getLevelX(), 320f);
+                break;
+            default:
+                break;
         }
-
-        return  blocksList;
-    }
-
-    public void initLevel(int level){
-        //Todo: Сделать реализацию загрузки уровня
-        //Для того, чтобы начать загрузку нового уровня, необходимо очистить движок
-        game.mainSceneLoader.getEngine().removeAllEntities();
 
     }
 
@@ -82,6 +59,17 @@ public class GameLoader {
 
     public float getPlayerX(){
         return playerScript.playerTransformComponent.x;
+    }
+
+    public float getLevelX(){
+        switch (currentLevel){
+            case 1:
+                return 180f;
+            case 2:
+                return 964f;
+            default:
+                return 0f;
+        }
     }
 
 }

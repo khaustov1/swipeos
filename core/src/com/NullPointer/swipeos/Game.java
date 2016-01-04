@@ -15,8 +15,6 @@ public class Game extends com.badlogic.gdx.Game {
 	public  Viewport       mainViewPort;
     public  SceneLoader    mainSceneLoader;
     public  ItemWrapper    mainItemWrapper;
-	private boolean        markForNewLevel;
-	private int            currLevelNum;
 
     private GameLoader gameLoader;
 	
@@ -32,17 +30,15 @@ public class Game extends com.badlogic.gdx.Game {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
-		//Если нужно загрузить новый уровень
-		if(markForNewLevel) {
-			gameLoader.initLevel(currLevelNum);
-			markForNewLevel = false;
-		}
-
         setCamera();
 	}
 
     private void setCamera(){
         if(gameLoader.getPlayerY() > 210f) //Экспериментально рассчитанное число
-        ((OrthographicCamera) mainViewPort.getCamera()).position.set(120f, gameLoader.getPlayerY(), 0);
+        ((OrthographicCamera) mainViewPort.getCamera()).position.set(gameLoader.getLevelX(), gameLoader.getPlayerY() + 110f, 0);
     }
+
+	public void setCameraCoords(float x, float y){
+		((OrthographicCamera) mainViewPort.getCamera()).position.set(x, y, 0);
+	}
 }

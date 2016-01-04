@@ -1,13 +1,13 @@
 package com.NullPointer.swipeos.Scripts;
 
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;
-import com.NullPointer.swipeos.utils.Wall;
+import com.NullPointer.swipeos.utils.GameLoader;
+import com.NullPointer.swipeos.utils.GameObject;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.scripts.IScript;
@@ -20,22 +20,28 @@ import java.util.List;
  */
 public class PlayerScript implements IScript {
 
+    private GameLoader gameLoader;
+
     public  TransformComponent    playerTransformComponent; //для получения координат персонажа
     private DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
 
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
+    private float     playerCircleRadius = 0f;
     private Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
     private int       speedLimit = 150;
+
+    private Circle    playerCircle;
 
     boolean isX_AxisNegative; // проверяем направление движения игрока
     boolean isY_AxisNegative; // проверяем направление движения игрока
 
     boolean isCollidingNow; // Флаг для того, чтобы не менять направление игрока во время коллизии
 
-    List<Wall> blocksList; // коллекция с препядствиями
+    List<GameObject> gameObjectList; // коллекция с препядствиями
 
-    public PlayerScript(List<Wall> blocks){
-        this.blocksList = blocks;
+    public PlayerScript(List<GameObject> gameObjects, GameLoader gameLoader){
+        this.gameObjectList = gameObjects;
+        this.gameLoader = gameLoader;
     }
 
     @Override
@@ -45,8 +51,13 @@ public class PlayerScript implements IScript {
         playerDimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
 
         // Уменьшаю размер игрока
-        playerDimensionsComponent.width = playerDimensionsComponent.width / 2.8f;
-        playerDimensionsComponent.height = playerDimensionsComponent.height / 2.8f;
+        playerDimensionsComponent.width = playerDimensionsComponent.width / 2f;
+        playerDimensionsComponent.height = playerDimensionsComponent.height / 2f;
+
+        playerCircleRadius = playerDimensionsComponent.width/2;
+        playerCircle = new Circle(playerTransformComponent.x + playerCircleRadius,
+                playerTransformComponent.y + playerCircleRadius,
+                playerDimensionsComponent.width/2);
 
         // Эта штука для отлова жестов свайпа, обработка в классе DirectionGestureDetector.class
 
@@ -97,18 +108,17 @@ public class PlayerScript implements IScript {
 
         speedLimit();
         moveCharacter(delta);
-
-        Rectangle playerRectangle = new Rectangle(
-                playerTransformComponent.x,
-                playerTransformComponent.y,
-                playerDimensionsComponent.width,
-                playerDimensionsComponent.height);
-
         // Проверка коллизий
-        for(Rectangle block : blocksList){
-            if(block.overlaps(playerRectangle) || playerTransformComponent.y < 0){
+        for(GameObject object : gameObjectList){
+            if(Intersector.overlaps(playerCircle, object) || playerTransformComponent.y < 0){
                 //Коллизия началась
                 isCollidingNow = true;
+
+                if(object.isPortal()){
+                    playerSpeed.x = 0;
+                    playerSpeed.y = 0;
+                    gameLoader.nextLevel();
+                }
 
                 if(playerSpeed.y > 0){
                     playerTransformComponent.y -= 3;
@@ -116,7 +126,7 @@ public class PlayerScript implements IScript {
                 else if(playerSpeed.y < 0){
                     playerTransformComponent.y += 3;
                 }
-                if(playerSpeed.x > 0) {
+                if(playerSpeed.x > 0){
                     playerTransformComponent.x -= 3;
                 }
                 else if(playerSpeed.x < 0){
@@ -168,5 +178,21 @@ public class PlayerScript implements IScript {
         if(playerSpeed.y < 0 && isY_AxisNegative){
             playerSpeed.y += friction;
         }
+
+        playerCircle.setX(playerTransformComponent.x + playerCircleRadius);
+        playerCircle.setY(playerTransformComponent.y + playerCircleRadius);
+    }
+
+    public void setPlayerСoordinates(float x, float y){
+        playerTransformComponent.x = x;
+        playerTransformComponent.y = y;
+    }
+
+    public List<GameObject> getGameObjectList() {
+        return gameObjectList;
+    }
+
+    public void setGameObjectList(List<GameObject> gameObjectList) {
+        this.gameObjectList = gameObjectList;
     }
 }
