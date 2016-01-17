@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.utils;
+package com.NullPointer.swipeos.Objects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;

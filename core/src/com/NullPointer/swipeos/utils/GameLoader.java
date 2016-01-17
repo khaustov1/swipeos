@@ -50,7 +50,6 @@ public class GameLoader {
             default:
                 break;
         }
-
     }
 
     public float getPlayerY(){

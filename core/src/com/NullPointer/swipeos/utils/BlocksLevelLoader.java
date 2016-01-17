@@ -17,7 +17,7 @@ public class BlocksLevelLoader {
 
     }
 
-    public static List<GameObject> getLevelBlocks(ItemWrapper itemWrapper, int level){
+    public static List<com.NullPointer.swipeos.Objects.GameObject> getLevelBlocks(ItemWrapper itemWrapper, int level){
         switch (level){
             case 1:
                 return loadBlocksLevel_1(8, itemWrapper);
@@ -28,8 +28,8 @@ public class BlocksLevelLoader {
         }
     }
 
-    private static List<GameObject> loadBlocksLevel_1(int numberOfBlocks, ItemWrapper itemWrapper){
-        List<GameObject> objectList = new ArrayList<GameObject>();
+    private static List<com.NullPointer.swipeos.Objects.GameObject> loadBlocksLevel_1(int numberOfBlocks, ItemWrapper itemWrapper){
+        List<com.NullPointer.swipeos.Objects.GameObject> objectList = new ArrayList<com.NullPointer.swipeos.Objects.GameObject>();
         for(int i = 0; i < numberOfBlocks; i++){
             Entity blockEntity = itemWrapper.getChild("wall" + i).getEntity();
             TransformComponent objectTransformComponent = blockEntity.getComponent(TransformComponent.class);
@@ -47,7 +47,7 @@ public class BlocksLevelLoader {
                 default:
                     break;
             }
-            objectList.add(new GameObject(
+            objectList.add(new com.NullPointer.swipeos.Objects.GameObject(
                     objectTransformComponent.x,
                     objectTransformComponent.y,
                     objectDimensionComponent.width,
@@ -58,7 +58,7 @@ public class BlocksLevelLoader {
         Entity portalEntity = itemWrapper.getChild("portal1").getEntity();
         TransformComponent portalTransformComponent = portalEntity.getComponent(TransformComponent.class);
         DimensionsComponent portalDimensionComponent = portalEntity.getComponent(DimensionsComponent.class);
-        GameObject portal = new GameObject(
+        com.NullPointer.swipeos.Objects.GameObject portal = new com.NullPointer.swipeos.Objects.GameObject(
                 portalTransformComponent.x,
                 portalTransformComponent.y,
                 portalDimensionComponent.width,
@@ -70,8 +70,8 @@ public class BlocksLevelLoader {
         return  objectList;
     }
 
-    private static List<GameObject> loadBlocksLevel_2(int numberOfBlocks, ItemWrapper itemWrapper){
-        List<GameObject> objectList = new ArrayList<GameObject>();
+    private static List<com.NullPointer.swipeos.Objects.GameObject> loadBlocksLevel_2(int numberOfBlocks, ItemWrapper itemWrapper){
+        List<com.NullPointer.swipeos.Objects.GameObject> objectList = new ArrayList<com.NullPointer.swipeos.Objects.GameObject>();
         for(int i = 0; i < numberOfBlocks; i++){
             Entity blockEntity = itemWrapper.getChild("wall2_" + i).getEntity();
             TransformComponent objectTransformComponent = blockEntity.getComponent(TransformComponent.class);
@@ -89,7 +89,7 @@ public class BlocksLevelLoader {
                 default:
                     break;
             }
-            objectList.add(new GameObject(
+            objectList.add(new com.NullPointer.swipeos.Objects.GameObject(
                     objectTransformComponent.x,
                     objectTransformComponent.y,
                     objectDimensionComponent.width,
@@ -100,7 +100,7 @@ public class BlocksLevelLoader {
         Entity portalEntity = itemWrapper.getChild("portal2").getEntity();
         TransformComponent portalTransformComponent = portalEntity.getComponent(TransformComponent.class);
         DimensionsComponent portalDimensionComponent = portalEntity.getComponent(DimensionsComponent.class);
-        GameObject portal = new GameObject(
+        com.NullPointer.swipeos.Objects.GameObject portal = new com.NullPointer.swipeos.Objects.GameObject(
                 portalTransformComponent.x,
                 portalTransformComponent.y,
                 portalDimensionComponent.width,

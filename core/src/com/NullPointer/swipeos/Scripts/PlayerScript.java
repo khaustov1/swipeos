@@ -1,12 +1,12 @@
 package com.NullPointer.swipeos.Scripts;
 
+import com.NullPointer.swipeos.utils.CollisionManager;
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;
 import com.NullPointer.swipeos.utils.GameLoader;
-import com.NullPointer.swipeos.utils.GameObject;
+import com.NullPointer.swipeos.Objects.GameObject;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
@@ -27,7 +27,7 @@ public class PlayerScript implements IScript {
 
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
     private float     playerCircleRadius = 0f;
-    private Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
+    public Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
     private int       speedLimit = 150;
 
     private Circle    playerCircle;
@@ -36,6 +36,8 @@ public class PlayerScript implements IScript {
     boolean isY_AxisNegative; // проверяем направление движения игрока
 
     boolean isCollidingNow; // Флаг для того, чтобы не менять направление игрока во время коллизии
+
+    boolean checkForCollision;
 
     List<GameObject> gameObjectList; // коллекция с препядствиями
 
@@ -51,8 +53,8 @@ public class PlayerScript implements IScript {
         playerDimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
 
         // Уменьшаю размер игрока
-        playerDimensionsComponent.width = playerDimensionsComponent.width / 2f;
-        playerDimensionsComponent.height = playerDimensionsComponent.height / 2f;
+        playerDimensionsComponent.width = playerDimensionsComponent.width / 1.3f;
+        playerDimensionsComponent.height = playerDimensionsComponent.height / 1.3f;
 
         playerCircleRadius = playerDimensionsComponent.width/2;
         playerCircle = new Circle(playerTransformComponent.x + playerCircleRadius,
@@ -65,7 +67,7 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onUp() {
-                if(!isCollidingNow) {
+                if (!isCollidingNow) {
                     playerSpeed.y += 90;
                     playerSpeed.x = 0;
                     isY_AxisNegative = false;
@@ -74,7 +76,7 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onRight() {
-                if(!isCollidingNow) {
+                if (!isCollidingNow) {
                     playerSpeed.x += 90;
                     playerSpeed.y = 0;
                     isX_AxisNegative = false;
@@ -83,7 +85,7 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onLeft() {
-                if(!isCollidingNow) {
+                if (!isCollidingNow) {
                     playerSpeed.x -= 90;
                     playerSpeed.y = 0;
                     isX_AxisNegative = true;
@@ -105,39 +107,9 @@ public class PlayerScript implements IScript {
     // Здесь идет обработка коллизий и изменение скорости во время рендеринга
     @Override
     public void act(float delta) {
-
         speedLimit();
         moveCharacter(delta);
-        // Проверка коллизий
-        for(GameObject object : gameObjectList){
-            if(Intersector.overlaps(playerCircle, object) || playerTransformComponent.y < 0){
-                //Коллизия началась
-                isCollidingNow = true;
-
-                if(object.isPortal()){
-                    playerSpeed.x = 0;
-                    playerSpeed.y = 0;
-                    gameLoader.nextLevel();
-                }
-
-                if(playerSpeed.y > 0){
-                    playerTransformComponent.y -= 3;
-                }
-                else if(playerSpeed.y < 0){
-                    playerTransformComponent.y += 3;
-                }
-                if(playerSpeed.x > 0){
-                    playerTransformComponent.x -= 3;
-                }
-                else if(playerSpeed.x < 0){
-                    playerTransformComponent.x += 3;
-                }
-                playerSpeed.x = - playerSpeed.x;
-                playerSpeed.y = - playerSpeed.y;
-            }
-        }
-        //Коллизия закончилась
-        isCollidingNow = false;
+        CollisionManager.checkForCollision(this, gameObjectList, playerCircle);
     }
 
     @Override
@@ -145,7 +117,15 @@ public class PlayerScript implements IScript {
 
     }
 
-    private void speedLimit(){
+    public void startCollision(){
+        isCollidingNow = true;
+    }
+
+    public void endCollision(){
+        isCollidingNow = false;
+    }
+
+    public void speedLimit(){
         if(playerSpeed.y < -speedLimit){
             playerSpeed.y = -speedLimit;
         }
@@ -160,7 +140,7 @@ public class PlayerScript implements IScript {
         }
     }
 
-    private void moveCharacter(float delta){
+    public void moveCharacter(float delta){
         //Двигаем персонажа
         playerTransformComponent.x += playerSpeed.x * delta;
         playerTransformComponent.y += playerSpeed.y * delta;
@@ -194,5 +174,21 @@ public class PlayerScript implements IScript {
 
     public void setGameObjectList(List<GameObject> gameObjectList) {
         this.gameObjectList = gameObjectList;
+    }
+
+    public GameLoader getGameLoader() {
+        return gameLoader;
+    }
+
+    public void enableCollisonDetection(){
+        this.checkForCollision = true;
+    }
+
+    public void disableCollisonDetection(){
+        this.checkForCollision = true;
+    }
+
+    public boolean getCollisionDetectionStatus(){
+        return this.checkForCollision;
     }
 }
