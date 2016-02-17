@@ -18,23 +18,16 @@ fone1
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-player
-  rotate: false
-  xy: 1084, 263
-  size: 377, 377
-  orig: 377, 377
-  offset: 0, 0
-  index: -1
 portal
   rotate: false
-  xy: 1084, 5
+  xy: 1084, 254
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 wall
   rotate: false
-  xy: 1463, 512
+  xy: 1084, 512
   size: 512, 128
   orig: 512, 128
   offset: 0, 0

@@ -4,6 +4,7 @@ import com.NullPointer.swipeos.utils.CollisionManager;
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;
 import com.NullPointer.swipeos.utils.GameLoader;
 import com.NullPointer.swipeos.Objects.GameObject;
+import com.NullPointer.swipeos.utils.LevelLoader;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Circle;
@@ -21,6 +22,7 @@ import java.util.List;
 public class PlayerScript implements IScript {
 
     private GameLoader gameLoader;
+    private LevelLoader levelLoader;
 
     public  TransformComponent    playerTransformComponent; //для получения координат персонажа
     private DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
@@ -39,10 +41,8 @@ public class PlayerScript implements IScript {
 
     boolean checkForCollision;
 
-    List<GameObject> gameObjectList; // коллекция с препядствиями
-
-    public PlayerScript(List<GameObject> gameObjects, GameLoader gameLoader){
-        this.gameObjectList = gameObjects;
+    public PlayerScript(LevelLoader levelLoader, GameLoader gameLoader){
+        this.levelLoader = levelLoader;
         this.gameLoader = gameLoader;
     }
 
@@ -59,7 +59,7 @@ public class PlayerScript implements IScript {
         playerCircleRadius = playerDimensionsComponent.width/2;
         playerCircle = new Circle(playerTransformComponent.x + playerCircleRadius,
                 playerTransformComponent.y + playerCircleRadius,
-                playerDimensionsComponent.width/2);
+                playerCircleRadius);
 
         // Эта штука для отлова жестов свайпа, обработка в классе DirectionGestureDetector.class
 
@@ -109,7 +109,7 @@ public class PlayerScript implements IScript {
     public void act(float delta) {
         speedLimit();
         moveCharacter(delta);
-        CollisionManager.checkForCollision(this, gameObjectList, playerCircle);
+        CollisionManager.checkForCollision(this, levelLoader, playerCircle);
     }
 
     @Override
@@ -168,27 +168,9 @@ public class PlayerScript implements IScript {
         playerTransformComponent.y = y;
     }
 
-    public List<GameObject> getGameObjectList() {
-        return gameObjectList;
-    }
-
-    public void setGameObjectList(List<GameObject> gameObjectList) {
-        this.gameObjectList = gameObjectList;
-    }
-
     public GameLoader getGameLoader() {
         return gameLoader;
     }
 
-    public void enableCollisonDetection(){
-        this.checkForCollision = true;
-    }
-
-    public void disableCollisonDetection(){
-        this.checkForCollision = true;
-    }
-
-    public boolean getCollisionDetectionStatus(){
-        return this.checkForCollision;
-    }
+    public LevelLoader getLevelLoader(){return levelLoader;}
 }

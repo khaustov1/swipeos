@@ -2,23 +2,17 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Game;
 import com.NullPointer.swipeos.Scripts.PlayerScript;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.uwsoft.editor.renderer.SceneLoader;
-import com.uwsoft.editor.renderer.components.DimensionsComponent;
-import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Khaustov on 05.12.15.
  */
 public class GameLoader {
-    Game game;
-    PlayerScript playerScript;
+    static Game game;
+    static PlayerScript playerScript;
+    static LevelLoader levelLoader;
 
     int currentLevel = 1;
 
@@ -27,12 +21,14 @@ public class GameLoader {
     }
 
     public void initialize(){
-        game.mainViewPort = new FitViewport(360,640);
+        game.mainViewPort = new ExtendViewport(360,640);
         game.mainSceneLoader = new SceneLoader();
         game.mainSceneLoader.loadScene("MainScene", game.mainViewPort);
         game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
         //// TODO: добавить загрузку последнего уровня для игрока
-        playerScript = new PlayerScript(BlocksLevelLoader.getLevelBlocks(game.mainItemWrapper, currentLevel), this);
+        levelLoader = new LevelLoader(game.mainItemWrapper);
+        levelLoader.loadLevel(currentLevel);
+        playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
     }
 
@@ -43,7 +39,7 @@ public class GameLoader {
             case 1:
                 break;
             case 2:
-                playerScript.setGameObjectList(BlocksLevelLoader.getLevelBlocks(game.mainItemWrapper, currentLevel));
+                levelLoader.loadLevel(2);
                 playerScript.setPlayerСoordinates(820f,10.33f);
                 game.setCameraCoords(getLevelX(), 320f);
                 break;
