@@ -65,12 +65,7 @@ public class LevelLoader {
                 default:
                     break;
             }
-            walls.add(new Wall(
-                    objectTransformComponent.x,
-                    objectTransformComponent.y,
-                    objectDimensionComponent.width,
-                    objectDimensionComponent.height
-            ));
+            walls.add(new Wall(blockEntity));
         }
         Entity portalEntity = itemWrapper.getChild("portal1").getEntity();
         TransformComponent portalTransformComponent = portalEntity.getComponent(TransformComponent.class);
@@ -101,12 +96,7 @@ public class LevelLoader {
                 default:
                     break;
             }
-            objectList.add(new Wall(
-                    objectTransformComponent.x,
-                    objectTransformComponent.y,
-                    objectDimensionComponent.width,
-                    objectDimensionComponent.height
-            ));
+            walls.add(new Wall(blockEntity));
         }
 
         Entity portalEntity = itemWrapper.getChild("portal2").getEntity();

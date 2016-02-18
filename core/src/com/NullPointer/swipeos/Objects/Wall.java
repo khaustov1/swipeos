@@ -47,6 +47,21 @@ public class Wall  implements GameObject{
         wallRectangle.setX(transformComponent.x);
     }
 
+    public void decreaseX(float decreaseValue){
+        transformComponent.x -= decreaseValue;
+        wallRectangle.setX(transformComponent.x);
+    }
+
+    public void increaseY(float increaseValue){
+        transformComponent.y += increaseValue;
+        wallRectangle.setY(transformComponent.y);
+    }
+
+    public void decreaseY(float decreaseValue){
+        transformComponent.y -= decreaseValue;
+        wallRectangle.setY(transformComponent.y);
+    }
+
     @Override
     public boolean isPortal() {
         return false;
