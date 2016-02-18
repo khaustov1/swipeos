@@ -15,10 +15,6 @@ public class Portal implements GameObject {
     public Circle getPortalCircle(){
         return portalCircle;
     }
-    @Override
-    public boolean isPortal() {
-        return true;
-    }
 
     @Override
     public boolean isDeadly() {

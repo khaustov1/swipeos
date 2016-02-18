@@ -62,10 +62,6 @@ public class Wall  implements GameObject{
         wallRectangle.setY(transformComponent.y);
     }
 
-    @Override
-    public boolean isPortal() {
-        return false;
-    }
 
     @Override
     public boolean isDeadly() {
