@@ -2,6 +2,7 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Wall;
+import com.NullPointer.swipeos.Scripts.PortalScript;
 import com.badlogic.ashley.core.Entity;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
@@ -78,6 +79,7 @@ public class LevelLoader {
         portal = new Portal(portalTransformComponent.x + portalRadius,
                 portalTransformComponent.y + portalRadius,
                 portalRadius);
+        itemWrapper.getChild("portal1").addScript(new PortalScript());
     }
 
     private void loadLevel_2(int numberOfBlocks, ItemWrapper itemWrapper){
