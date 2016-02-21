@@ -84,6 +84,7 @@ public class LevelLoader {
     }
 
     private void loadLevel_2(int numberOfBlocks, ItemWrapper itemWrapper){
+        walls.clear();
         List<com.NullPointer.swipeos.Objects.GameObject> objectList = new ArrayList<com.NullPointer.swipeos.Objects.GameObject>();
         for(int i = 0; i < numberOfBlocks; i++){
             Entity blockEntity = itemWrapper.getChild("wall2_" + i).getEntity();
