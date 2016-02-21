@@ -68,6 +68,7 @@ public class LevelLoader {
             }
             Wall wall = new Wall(blockEntity);
             if(i==2){
+                wall.setIsDeadly(true);
                 itemWrapper.getChild("wall2").addScript(new MovingWallScript(wall,'x', wall.getX(), wall.getX()+200, 50f));
             }
             walls.add(wall);

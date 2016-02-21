@@ -40,8 +40,8 @@ public class GameLoader {
                 break;
             case 2:
                 levelLoader.loadLevel(2);
-                playerScript.setPlayerСoordinates(820f,10.33f);
-                game.setCameraCoords(getLevelX(), 320f);
+                playerScript.setPlayerСoordinates(10.33f,1170);
+                game.setCameraCoords(130f, getLevelY());
                 break;
             default:
                 break;
@@ -56,15 +56,19 @@ public class GameLoader {
         return playerScript.playerTransformComponent.x;
     }
 
-    public float getLevelX(){
+    public float getLevelY(){
         switch (currentLevel){
             case 1:
                 return 180f;
             case 2:
-                return 964f;
+                return 1155f;
             default:
                 return 0f;
         }
+    }
+
+    public void SetCameraCoords(float x, float y){
+        game.setCameraCoords(x, y);
     }
 
 }

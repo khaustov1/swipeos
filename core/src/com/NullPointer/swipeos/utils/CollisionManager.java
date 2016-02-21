@@ -20,6 +20,16 @@ public class CollisionManager {
                 //Коллизия началась
                 playerScript.startCollision();
 
+                if(wall.isDeadly()){
+                    playerScript.playerTransformComponent.x = 230;
+                    playerScript.playerTransformComponent.y = 26;
+                    playerCircle.setX(playerScript.playerTransformComponent.x + playerCircle.radius);
+                    playerCircle.setY(playerScript.playerTransformComponent.y + playerCircle.radius);
+                    playerScript.endCollision();
+                    playerScript.getGameLoader().SetCameraCoords(180, 320);
+                    return;
+                }
+
                 if (playerScript.playerSpeed.y > 0) {
                     playerScript.playerTransformComponent.y -= 3;
                 } else if (playerScript.playerSpeed.y < 0) {

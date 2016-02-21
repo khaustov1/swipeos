@@ -13,6 +13,7 @@ public class Wall  implements GameObject{
     private Rectangle wallRectangle;
     private TransformComponent transformComponent;
     private DimensionsComponent dimensionsComponent;
+    boolean isDeadly;
 
     public  Wall(Entity entity){
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
@@ -73,6 +74,10 @@ public class Wall  implements GameObject{
 
     @Override
     public boolean isDeadly() {
-        return false;
+        return isDeadly;
+    }
+
+    public void setIsDeadly(boolean isDeadly){
+        this.isDeadly = isDeadly;
     }
 }
