@@ -2,6 +2,7 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Wall;
+import com.NullPointer.swipeos.Scripts.MovingWallScript;
 import com.NullPointer.swipeos.Scripts.PortalScript;
 import com.badlogic.ashley.core.Entity;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
@@ -65,7 +66,11 @@ public class LevelLoader {
                 default:
                     break;
             }
-            walls.add(new Wall(blockEntity));
+            Wall wall = new Wall(blockEntity);
+            if(i==2){
+                itemWrapper.getChild("wall2").addScript(new MovingWallScript(wall,'x', wall.getX(), wall.getX()+200, 50f));
+            }
+            walls.add(wall);
         }
         Entity portalEntity = itemWrapper.getChild("portal1").getEntity();
         TransformComponent portalTransformComponent = portalEntity.getComponent(TransformComponent.class);

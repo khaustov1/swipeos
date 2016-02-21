@@ -35,6 +35,14 @@ public class Wall  implements GameObject{
         wallRectangle.setY(y);
     }
 
+    public float getX(){
+        return transformComponent.x;
+    }
+
+    public float getY(){
+        return transformComponent.y;
+    }
+
     public void setPosition(float x, float y){
         transformComponent.x = x;
         wallRectangle.setX(x);
