@@ -4,32 +4,34 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-backgorund
+fone1-2
   rotate: false
-  xy: 1084, 642
-  size: 720, 1280
-  orig: 720, 1280
-  offset: 0, 0
-  index: -1
-fone1
-  rotate: false
-  xy: 2, 2
+  xy: 2, 56
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
 portalimg
   rotate: false
-  xy: 1084, 254
+  xy: 1084, 1720
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
-wall
+stargold256
   rotate: false
-  xy: 1084, 512
-  size: 512, 128
-  orig: 512, 128
+  xy: 1084, 1462
+  size: 256, 256
+  split: 0, 0, 0, 0
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+wallsteel
+  rotate: false
+  xy: 2, 2
+  size: 269, 52
+  split: 34, 40, 0, 0
+  orig: 269, 52
   offset: 0, 0
   index: -1
 
@@ -38,7 +40,7 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-fone2
+fone2-2
   rotate: false
   xy: 2, 2
   size: 1080, 1920
@@ -51,7 +53,7 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-fone3
+fone3-2
   rotate: false
   xy: 2, 2
   size: 1080, 1920
@@ -64,7 +66,7 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-fone4
+fone4-2
   rotate: false
   xy: 2, 2
   size: 1080, 1920

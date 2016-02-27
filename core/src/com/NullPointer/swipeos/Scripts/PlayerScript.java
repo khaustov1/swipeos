@@ -25,7 +25,7 @@ public class PlayerScript implements IScript {
     private LevelLoader levelLoader;
 
     public  TransformComponent    playerTransformComponent; //для получения координат персонажа
-    private DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
+    public  DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
 
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
     private float     playerCircleRadius = 0f;

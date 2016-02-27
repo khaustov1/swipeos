@@ -34,8 +34,10 @@ public class Game extends com.badlogic.gdx.Game {
 	}
 
     private void setCamera(){
-        if(gameLoader.getPlayerY() > 210f) //Экспериментально рассчитанное число
-        ((OrthographicCamera) mainViewPort.getCamera()).position.set(180f, gameLoader.getPlayerY() + 110f, 0);
+		if(!(mainViewPort.getCamera().position.y >= gameLoader.getCameraStopY())) {
+			if (gameLoader.getPlayerY() > 210f) //Экспериментально рассчитанное число
+				((OrthographicCamera) mainViewPort.getCamera()).position.set(gameLoader.getLevelXStartCoordinate(), gameLoader.getPlayerY() + 110f, 0);
+		}
     }
 
 	public void setCameraCoords(float x, float y){
