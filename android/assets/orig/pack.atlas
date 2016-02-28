@@ -4,6 +4,14 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+backForPopUp
+  rotate: false
+  xy: 1084, 1576
+  size: 400, 400
+  split: 0, 0, 0, 0
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
 fone1-2
   rotate: false
   xy: 2, 56
@@ -13,14 +21,14 @@ fone1-2
   index: -1
 portalimg
   rotate: false
-  xy: 1084, 1720
+  xy: 1084, 1318
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 stargold256
   rotate: false
-  xy: 1084, 1462
+  xy: 1486, 1720
   size: 256, 256
   split: 0, 0, 0, 0
   orig: 256, 256
@@ -32,6 +40,14 @@ wallsteel
   size: 269, 52
   split: 34, 40, 0, 0
   orig: 269, 52
+  offset: 0, 0
+  index: -1
+wallsteel1
+  rotate: false
+  xy: 1084, 1047
+  size: 52, 269
+  split: 0, 0, 0, 0
+  orig: 52, 269
   offset: 0, 0
   index: -1
 

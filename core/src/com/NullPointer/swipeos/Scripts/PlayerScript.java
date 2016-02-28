@@ -30,7 +30,7 @@ public class PlayerScript implements IScript {
     private float     friction = 0.1f; // трение, чтобы игрок останавливался
     private float     playerCircleRadius = 0f;
     public Vector2   playerSpeed = new Vector2(0f,0f); //вектор, хранящий в себе скорость пресонажа по осям
-    private int       speedLimit = 150;
+    private int       speedLimit = 250;
 
     private Circle    playerCircle;
 
@@ -67,8 +67,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onUp() {
-                if (!isCollidingNow) {
-                    playerSpeed.y += 90;
+                if (!isCollidingNow && !gameLoader.isPaused()) {
+                    playerSpeed.y += 180;
                     playerSpeed.x = 0;
                     isY_AxisNegative = false;
                 }
@@ -76,8 +76,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onRight() {
-                if (!isCollidingNow) {
-                    playerSpeed.x += 90;
+                if (!isCollidingNow && !gameLoader.isPaused()) {
+                    playerSpeed.x += 180;
                     playerSpeed.y = 0;
                     isX_AxisNegative = false;
                 }
@@ -85,8 +85,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onLeft() {
-                if (!isCollidingNow) {
-                    playerSpeed.x -= 90;
+                if (!isCollidingNow && !gameLoader.isPaused()) {
+                    playerSpeed.x -= 180;
                     playerSpeed.y = 0;
                     isX_AxisNegative = true;
                 }
@@ -94,8 +94,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onDown() {
-                if (!isCollidingNow) {
-                    playerSpeed.y -= 90;
+                if (!isCollidingNow && !gameLoader.isPaused()) {
+                    playerSpeed.y -= 180;
                     playerSpeed.x = 0;
                     isY_AxisNegative = true;
                 }

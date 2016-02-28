@@ -75,7 +75,7 @@ public class CollisionManager {
             if (Intersector.overlaps(playerCircle, levelLoader.getLevelPortal().getPortalCircle())) {
                 playerScript.playerSpeed.x = 0;
                 playerScript.playerSpeed.y = 0;
-                playerScript.getGameLoader().nextLevel();
+                playerScript.getGameLoader().showLevelCompleteWindow();
             }
             //Коллизия закончилась
             playerScript.endCollision();

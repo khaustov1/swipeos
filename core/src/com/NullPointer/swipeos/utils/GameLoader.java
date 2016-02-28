@@ -2,6 +2,8 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Game;
 import com.NullPointer.swipeos.Scripts.PlayerScript;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -18,6 +20,16 @@ public class GameLoader {
     static LevelLoader levelLoader;
     private final float startLevelYCameraCoord = 320f;
     private final float StartLevelPlayerPosition = 45f;
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    private boolean paused;
 
     int currentLevel = 1;
 
@@ -47,6 +59,10 @@ public class GameLoader {
         game.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
     }
 
+    public void showLevelCompleteWindow(){
+        levelLoader.showLevelCompleteWindow();
+    }
+
     public float getPlayerY(){
         return playerScript.playerTransformComponent.y;
     }
@@ -70,5 +86,12 @@ public class GameLoader {
 
     public void setLevelXStartCoordinate(float levelXStartCoordinate) {
         this.levelXStartCoordinate = levelXStartCoordinate;
+    }
+    public Vector3 getCameraCoordinates(){
+        return game.mainViewPort.getCamera().position;
+    }
+
+    public OrthographicCamera getMainCamera(){
+        return (OrthographicCamera) game.mainViewPort.getCamera();
     }
 }

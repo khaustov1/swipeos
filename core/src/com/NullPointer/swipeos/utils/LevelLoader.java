@@ -4,10 +4,18 @@ import com.NullPointer.swipeos.Game;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
+import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.PortalScript;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
+import com.uwsoft.editor.renderer.components.MainItemComponent;
+import com.uwsoft.editor.renderer.components.NodeComponent;
+import com.uwsoft.editor.renderer.components.ScriptComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
+import com.uwsoft.editor.renderer.components.additional.ButtonComponent;
+import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
@@ -42,6 +50,10 @@ public class LevelLoader {
                 break;
             case 3:
                 loadLevel_3();
+                break;
+            case 4:
+                loadLevel_4();
+                break;
             default:
 
                 break;
@@ -67,7 +79,16 @@ public class LevelLoader {
 
     private void loadLevel_3(){
         int level = 3;
-        fillLevelWalls(2, level);
+        fillLevelWalls(5, level);
+        fillLevelStars(3, level);
+        fillLevelPortal(level);
+        setLevelStopWall(level);
+        setLevelStartCoordinate(level);
+    }
+
+    private void loadLevel_4(){
+        int level = 4;
+        fillLevelWalls(9, level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
@@ -109,10 +130,41 @@ public class LevelLoader {
 
     public float getLevelStopY(){
         if(stopWall != null) {
-            return stopWall.getY() - 320f;
+            return stopWall.getY() - 323f;
         }
         else {
             return 0f;
+        }
+    }
+
+    public void showLevelCompleteWindow(){
+        Entity windowEntity = itemWrapper.getChild("levelComplete").getEntity();
+        TransformComponent windowTransformComponent = ComponentRetriever.get(windowEntity, TransformComponent.class);
+        DimensionsComponent windowDimensionComponent = ComponentRetriever.get(windowEntity, DimensionsComponent.class);
+        Vector3 cameraCoordinates = gameLoader.getCameraCoordinates();
+        windowTransformComponent.x = cameraCoordinates.x - windowDimensionComponent.width/2;
+        windowTransformComponent.y = cameraCoordinates.y - windowDimensionComponent.height/2;
+        initLevelCompleteWindow();
+    }
+
+    public void initLevelCompleteWindow(){
+        gameLoader.setPaused(true);
+        Entity windowEntity = itemWrapper.getChild("levelComplete").getEntity();
+        TransformComponent windowTransformComponent = ComponentRetriever.get(windowEntity, TransformComponent.class);
+        NodeComponent windowNodeComponent = ComponentRetriever.get(windowEntity, NodeComponent.class);
+        for(Entity child :windowNodeComponent.children){
+            MainItemComponent childMainItemComponent = child.getComponent(MainItemComponent.class);
+            if(childMainItemComponent.itemIdentifier.equals("NextLevelButton")){
+                ScriptComponent scriptComponent = new ScriptComponent();
+                //Удалить скрипт, если есть
+                TransformComponent transformComponent = ComponentRetriever.get(child, TransformComponent.class);
+                DimensionsComponent dimensionsComponent = ComponentRetriever.get(child, DimensionsComponent.class);
+                Rectangle buttonRectangle = new Rectangle(transformComponent.x+windowTransformComponent.x,
+                        transformComponent.y + windowTransformComponent.y,
+                        dimensionsComponent.width, dimensionsComponent.height);
+                scriptComponent.addScript((new NextLevelButtonScript(gameLoader, buttonRectangle)));
+                child.add(scriptComponent);
+            }
         }
     }
 
