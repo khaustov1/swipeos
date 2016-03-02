@@ -6,10 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game extends com.badlogic.gdx.Game {
 	public  Viewport       mainViewPort;
@@ -17,21 +21,28 @@ public class Game extends com.badlogic.gdx.Game {
     public  ItemWrapper    mainItemWrapper;
 
     private GameLoader gameLoader;
-	
-	@Override
+    private Game game;
+    public static OnLoadListener onLoadListener;
+
+    public Game(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+
+
+    @Override
 	public void create () {
-		gameLoader = new GameLoader(this);
-		gameLoader.initialize();
-	}
+        game = this;
+        gameLoader = new GameLoader(game);
+        gameLoader.initialize();
+    }
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
-
+    @Override
+    public void render () {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
         setCamera();
-	}
+    }
 
     private void setCamera(){
 		if(!(mainViewPort.getCamera().position.y >= gameLoader.getCameraStopY())) {
@@ -43,4 +54,5 @@ public class Game extends com.badlogic.gdx.Game {
 	public void setCameraCoords(float x, float y){
 		((OrthographicCamera) mainViewPort.getCamera()).position.set(x, y, 0);
 	}
+
 }

@@ -18,6 +18,7 @@ public class GameLoader {
     static Game game;
     static PlayerScript playerScript;
     static LevelLoader levelLoader;
+    static GameResourceManager gameResourceManager;
     private final float startLevelYCameraCoord = 320f;
     private final float StartLevelPlayerPosition = 45f;
 
@@ -49,6 +50,7 @@ public class GameLoader {
         levelLoader.loadLevel(currentLevel);
         playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
+        game.onLoadListener.onLoad();
     }
 
 
