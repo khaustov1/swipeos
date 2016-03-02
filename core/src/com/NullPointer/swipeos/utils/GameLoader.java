@@ -41,7 +41,7 @@ public class GameLoader {
     }
 
     public void initialize(){
-        game.mainViewPort = new FitViewport(360,640);
+        game.mainViewPort = new ExtendViewport(360,640);
         game.mainSceneLoader = new SceneLoader();
         game.mainSceneLoader.loadScene("levelPack1", game.mainViewPort);
         game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
@@ -50,6 +50,7 @@ public class GameLoader {
         levelLoader.loadLevel(currentLevel);
         playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
+        game.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
         game.onLoadListener.onLoad();
     }
 
