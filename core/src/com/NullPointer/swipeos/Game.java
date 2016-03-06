@@ -1,23 +1,15 @@
 package com.NullPointer.swipeos;
 
 import com.NullPointer.swipeos.utils.GameLoader;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game extends com.badlogic.gdx.Game {
 	public  Viewport       mainViewPort;
-    public  SceneLoader    mainSceneLoader;
+    public com.NullPointer.swipeos.utils.SceneLoader mainSceneLoader;
     public  ItemWrapper    mainItemWrapper;
 
     private GameLoader gameLoader;
@@ -38,6 +30,9 @@ public class Game extends com.badlogic.gdx.Game {
 
     @Override
     public void render () {
+        if(mainSceneLoader.getEngine().getEntities().size() == 0 && gameLoader.isNeedToLoadScene){
+            gameLoader.loadCurrentScene();
+        }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());

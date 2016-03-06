@@ -6,6 +6,7 @@ import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.PortalScript;
+import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -38,6 +39,16 @@ public class LevelLoader {
     {
         this.itemWrapper = itemWrapper;
         this.gameLoader = gameLoader;
+    }
+
+    public void loadMainScreen(){
+        Entity playButtonEntity = itemWrapper.getChild("playButton").getEntity();
+        TransformComponent playButtonTransformComponent = playButtonEntity.getComponent(TransformComponent.class);
+        DimensionsComponent playButtonlDimensionComponent = playButtonEntity.getComponent(DimensionsComponent.class);
+        Rectangle playButtonRectangle = new Rectangle(playButtonTransformComponent.x, playButtonTransformComponent.y,
+                playButtonlDimensionComponent.width, playButtonlDimensionComponent.height) ;
+
+        itemWrapper.getChild("playButton").addScript(new PlayButtonScript(this.gameLoader, playButtonRectangle, playButtonEntity));
     }
 
     public void loadLevel(int level){

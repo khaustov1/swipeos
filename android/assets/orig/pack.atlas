@@ -4,12 +4,51 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+About
+  rotate: false
+  xy: 1868, 1804
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Exit
+  rotate: false
+  xy: 1084, 372
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Play
+  rotate: false
+  xy: 1868, 1630
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Sound
+  rotate: false
+  xy: 1084, 198
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
 backForPopUp
   rotate: false
-  xy: 1084, 1576
+  xy: 1084, 804
   size: 400, 400
   split: 0, 0, 0, 0
   orig: 400, 400
+  offset: 0, 0
+  index: -1
+blackhole
+  rotate: false
+  xy: 1084, 1206
+  size: 782, 770
+  orig: 782, 770
   offset: 0, 0
   index: -1
 fone1-2
@@ -21,14 +60,14 @@ fone1-2
   index: -1
 portalimg
   rotate: false
-  xy: 1084, 1318
+  xy: 1084, 546
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 stargold256
   rotate: false
-  xy: 1486, 1720
+  xy: 1486, 948
   size: 256, 256
   split: 0, 0, 0, 0
   orig: 256, 256
@@ -44,7 +83,7 @@ wallsteel
   index: -1
 wallsteel1
   rotate: false
-  xy: 1084, 1047
+  xy: 1258, 275
   size: 52, 269
   split: 0, 0, 0, 0
   orig: 52, 269

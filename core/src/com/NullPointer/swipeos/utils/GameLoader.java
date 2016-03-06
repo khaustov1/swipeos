@@ -5,10 +5,6 @@ import com.NullPointer.swipeos.Scripts.PlayerScript;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 /**
@@ -18,19 +14,11 @@ public class GameLoader {
     static Game game;
     static PlayerScript playerScript;
     static LevelLoader levelLoader;
-    static GameResourceManager gameResourceManager;
     private final float startLevelYCameraCoord = 320f;
     private final float StartLevelPlayerPosition = 45f;
-
-    public boolean isPaused() {
-        return paused;
-    }
-
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
-
     private boolean paused;
+    private String sceneToLoad = "";
+    public boolean isNeedToLoadScene;
 
     int currentLevel = 1;
 
@@ -43,7 +31,18 @@ public class GameLoader {
     public void initialize(){
         game.mainViewPort = new ExtendViewport(360,640);
         game.mainSceneLoader = new SceneLoader();
-        game.mainSceneLoader.loadScene("levelPack1", game.mainViewPort);
+        game.mainSceneLoader.loadScene("MainScene", game.mainViewPort);
+        game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
+        //// TODO: добавить загрузку последнего уровня для игрока
+        levelLoader = new LevelLoader(game.mainItemWrapper, this);
+        levelLoader.loadMainScreen();
+
+        game.setCameraCoords(180f, 320f);
+        game.onLoadListener.onLoad();
+    }
+
+    public void initializeGameStage_1_10(){
+        game.mainSceneLoader.loadScene("levelPack1", game.mainViewPort, this);
         game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
         //// TODO: добавить загрузку последнего уровня для игрока
         levelLoader = new LevelLoader(game.mainItemWrapper, this);
@@ -51,7 +50,6 @@ public class GameLoader {
         playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
         game.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
-        game.onLoadListener.onLoad();
     }
 
 
@@ -96,5 +94,28 @@ public class GameLoader {
 
     public OrthographicCamera getMainCamera(){
         return (OrthographicCamera) game.mainViewPort.getCamera();
+    }
+
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    public void removeAllEntities(){
+        game.mainSceneLoader.removeAllEntities();
+    }
+
+    public void setSceneToLoad(String sceneToLoad){
+        this.sceneToLoad = sceneToLoad;
+        this.isNeedToLoadScene = true;
+    }
+
+    public void loadCurrentScene(){
+        this.isNeedToLoadScene = false;
+        initializeGameStage_1_10();
     }
 }
