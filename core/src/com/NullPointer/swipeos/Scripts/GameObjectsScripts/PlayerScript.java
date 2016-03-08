@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.Scripts;
+package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.NullPointer.swipeos.utils.CollisionManager;
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;

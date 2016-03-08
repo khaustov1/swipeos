@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.Scripts;
+package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.badlogic.ashley.core.Entity;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;

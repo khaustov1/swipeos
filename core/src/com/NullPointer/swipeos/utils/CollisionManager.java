@@ -2,12 +2,11 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
-import com.NullPointer.swipeos.Scripts.PlayerScript;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by Khaustov on 17.01.16.

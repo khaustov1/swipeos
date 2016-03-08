@@ -4,78 +4,24 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-About
+bgleft
   rotate: false
-  xy: 1868, 1804
-  size: 172, 172
+  xy: 1084, 2
+  size: 825, 2040
   split: 0, 0, 0, 0
-  orig: 172, 172
-  offset: 0, 0
-  index: -1
-Exit
-  rotate: false
-  xy: 1084, 372
-  size: 172, 172
-  split: 0, 0, 0, 0
-  orig: 172, 172
-  offset: 0, 0
-  index: -1
-Play
-  rotate: false
-  xy: 1868, 1630
-  size: 172, 172
-  split: 0, 0, 0, 0
-  orig: 172, 172
-  offset: 0, 0
-  index: -1
-Sound
-  rotate: false
-  xy: 1084, 198
-  size: 172, 172
-  split: 0, 0, 0, 0
-  orig: 172, 172
-  offset: 0, 0
-  index: -1
-backForPopUp
-  rotate: false
-  xy: 1084, 804
-  size: 400, 400
-  split: 0, 0, 0, 0
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
-blackhole
-  rotate: false
-  xy: 1084, 1206
-  size: 782, 770
-  orig: 782, 770
+  orig: 825, 2040
   offset: 0, 0
   index: -1
 fone1-2
   rotate: false
-  xy: 2, 56
+  xy: 2, 122
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-portalimg
-  rotate: false
-  xy: 1084, 546
-  size: 256, 256
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
-stargold256
-  rotate: false
-  xy: 1486, 948
-  size: 256, 256
-  split: 0, 0, 0, 0
-  orig: 256, 256
-  offset: 0, 0
-  index: -1
 wallsteel
   rotate: false
-  xy: 2, 2
+  xy: 2, 68
   size: 269, 52
   split: 34, 40, 0, 0
   orig: 269, 52
@@ -83,7 +29,7 @@ wallsteel
   index: -1
 wallsteel1
   rotate: false
-  xy: 1258, 275
+  xy: 1911, 1773
   size: 52, 269
   split: 0, 0, 0, 0
   orig: 52, 269
@@ -95,9 +41,49 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+About
+  rotate: false
+  xy: 1859, 1870
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Exit
+  rotate: false
+  xy: 1859, 1696
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Play
+  rotate: false
+  xy: 1859, 1522
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+Sound
+  rotate: false
+  xy: 1859, 1348
+  size: 172, 172
+  split: 0, 0, 0, 0
+  orig: 172, 172
+  offset: 0, 0
+  index: -1
+bgright
+  rotate: false
+  xy: 1084, 2
+  size: 773, 2040
+  split: 0, 0, 0, 0
+  orig: 773, 2040
+  offset: 0, 0
+  index: -1
 fone2-2
   rotate: false
-  xy: 2, 2
+  xy: 2, 122
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
@@ -108,11 +94,41 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+backForPopUp
+  rotate: false
+  xy: 1084, 750
+  size: 400, 400
+  split: 0, 0, 0, 0
+  orig: 400, 400
+  offset: 0, 0
+  index: -1
+blackhole
+  rotate: false
+  xy: 1084, 1152
+  size: 782, 770
+  orig: 782, 770
+  offset: 0, 0
+  index: -1
 fone3-2
   rotate: false
   xy: 2, 2
   size: 1080, 1920
   orig: 1080, 1920
+  offset: 0, 0
+  index: -1
+portalimg
+  rotate: false
+  xy: 1084, 492
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+stargold256
+  rotate: false
+  xy: 1486, 894
+  size: 256, 256
+  split: 0, 0, 0, 0
+  orig: 256, 256
   offset: 0, 0
   index: -1
 

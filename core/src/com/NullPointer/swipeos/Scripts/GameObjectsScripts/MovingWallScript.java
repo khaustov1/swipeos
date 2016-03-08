@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.Scripts;
+package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.NullPointer.swipeos.Objects.Wall;
 import com.badlogic.ashley.core.Entity;

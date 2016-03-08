@@ -34,7 +34,7 @@ public class PlayButtonScript implements IScript{
 
     @Override
     public void act(float delta) {
-        transformComponent.rotation += 40 *delta;
+        transformComponent.rotation += 20 *delta;
         if(Gdx.input.justTouched()){
             Vector3 pos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             gameLoader.getMainCamera().unproject(pos);

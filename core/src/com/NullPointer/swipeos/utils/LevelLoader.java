@@ -1,13 +1,15 @@
 package com.NullPointer.swipeos.utils;
 
-import com.NullPointer.swipeos.Game;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
-import com.NullPointer.swipeos.Scripts.PortalScript;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
+import com.NullPointer.swipeos.Scripts.mainMenu.startGameButtonScript;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
@@ -15,10 +17,9 @@ import com.uwsoft.editor.renderer.components.MainItemComponent;
 import com.uwsoft.editor.renderer.components.NodeComponent;
 import com.uwsoft.editor.renderer.components.ScriptComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
-import com.uwsoft.editor.renderer.components.additional.ButtonComponent;
-import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class LevelLoader {
     private GameLoader gameLoader;
     private Wall stopWall;
     private List<Star> stars = new ArrayList<Star>();
+    private Music menuMusic;
 
 
     public LevelLoader(ItemWrapper itemWrapper, GameLoader gameLoader)
@@ -49,6 +51,10 @@ public class LevelLoader {
                 playButtonlDimensionComponent.width, playButtonlDimensionComponent.height) ;
 
         itemWrapper.getChild("playButton").addScript(new PlayButtonScript(this.gameLoader, playButtonRectangle, playButtonEntity));
+        itemWrapper.getChild("startButton").addScript(new startGameButtonScript());
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Calm.mp3"));
+        menuMusic.setLooping(true);
+        menuMusic.play();
     }
 
     public void loadLevel(int level){

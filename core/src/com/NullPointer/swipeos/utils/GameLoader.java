@@ -1,7 +1,7 @@
 package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Game;
-import com.NullPointer.swipeos.Scripts.PlayerScript;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
