@@ -3,11 +3,11 @@ package com.NullPointer.swipeos.utils;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.StarScript;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
-import com.NullPointer.swipeos.Scripts.mainMenu.startGameButtonScript;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -47,12 +47,20 @@ public class LevelLoader {
     public void loadMainScreen(){
         Entity playButtonEntity = itemWrapper.getChild("playButton").getEntity();
         TransformComponent playButtonTransformComponent = playButtonEntity.getComponent(TransformComponent.class);
-        DimensionsComponent playButtonlDimensionComponent = playButtonEntity.getComponent(DimensionsComponent.class);
+        DimensionsComponent playButtonDimensionComponent = playButtonEntity.getComponent(DimensionsComponent.class);
         Rectangle playButtonRectangle = new Rectangle(playButtonTransformComponent.x, playButtonTransformComponent.y,
-                playButtonlDimensionComponent.width, playButtonlDimensionComponent.height) ;
+                playButtonDimensionComponent.width, playButtonDimensionComponent.height) ;
+
+        playButtonTransformComponent.scaleY = 1.5f;
+        playButtonTransformComponent.scaleX = 1.5f;
+
+        Entity dustEntity = itemWrapper.getChild("dust").getEntity();
+        TransformComponent dustTransformComponent = dustEntity.getComponent(TransformComponent.class);
+
+        dustTransformComponent.scaleY = 1.5f;
+        dustTransformComponent.scaleX = 1.5f;
 
         itemWrapper.getChild("playButton").addScript(new PlayButtonScript(this.gameLoader, playButtonRectangle, playButtonEntity));
-        itemWrapper.getChild("startButton").addScript(new startGameButtonScript());
         itemWrapper.getChild("bg").addScript(new BackGroundScript());
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Calm.mp3"));
         menuMusic.setLooping(true);

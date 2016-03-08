@@ -96,36 +96,43 @@ filter: Linear,Linear
 repeat: none
 backForPopUp
   rotate: false
-  xy: 1084, 750
+  xy: 1084, 2
   size: 400, 400
   split: 0, 0, 0, 0
   orig: 400, 400
   offset: 0, 0
   index: -1
-blackhole
-  rotate: false
-  xy: 1084, 1152
-  size: 782, 770
-  orig: 782, 770
-  offset: 0, 0
-  index: -1
 fone3-2
   rotate: false
-  xy: 2, 2
+  xy: 2, 86
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
+hole-dust1-2
+  rotate: false
+  xy: 1084, 1206
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+hole-vortex
+  rotate: false
+  xy: 1084, 404
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
 portalimg
   rotate: false
-  xy: 1084, 492
+  xy: 1486, 146
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 stargold256
   rotate: false
-  xy: 1486, 894
+  xy: 1744, 146
   size: 256, 256
   split: 0, 0, 0, 0
   orig: 256, 256

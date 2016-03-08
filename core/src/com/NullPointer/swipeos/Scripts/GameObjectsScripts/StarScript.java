@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.Scripts.mainMenu;
+package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,25 +11,26 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 /**
  * Created by Khaustov on 08.03.16.
  */
-public class startGameButtonScript implements IScript{
+public class StarScript implements IScript{
     private Entity entity;
     TransformComponent transformComponent;
     DimensionsComponent dimensionsComponent;
-    private float increment = 0.5f;
+    private float increment = 0.25f;
     private float startWidth;
-    private float startHeight;
     private Vector2 center = new Vector2(0,0);
-    private float size = 25f;
+    private float size = 15f;
 
-    @Override
-    public void init(Entity entity) {
+    public StarScript(Entity entity){
         this.entity = entity;
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
-        startHeight = dimensionsComponent.height;
         startWidth = dimensionsComponent.width;
         center.x = transformComponent.x + dimensionsComponent.width/2;
         center.y = transformComponent.y + dimensionsComponent.height/2;
+    }
+
+    @Override
+    public void init(Entity entity) {
     }
 
     @Override
