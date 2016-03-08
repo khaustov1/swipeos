@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 bgleft
   rotate: false
-  xy: 1084, 2
+  xy: 1084, 4
   size: 825, 2040
   split: 0, 0, 0, 0
   orig: 825, 2040
@@ -14,25 +14,72 @@ bgleft
   index: -1
 fone1-2
   rotate: false
-  xy: 2, 122
+  xy: 2, 124
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-wallsteel
+line
   rotate: false
-  xy: 2, 68
-  size: 269, 52
-  split: 34, 40, 0, 0
-  orig: 269, 52
+  xy: 2, 2
+  size: 1080, 120
+  orig: 1080, 120
   offset: 0, 0
   index: -1
-wallsteel1
+line2
   rotate: false
-  xy: 1911, 1773
-  size: 52, 269
-  split: 0, 0, 0, 0
-  orig: 52, 269
+  xy: 1911, 964
+  size: 120, 1080
+  orig: 120, 1080
+  offset: 0, 0
+  index: -1
+mwall5w
+  rotate: false
+  xy: 1911, 842
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+mwalle1
+  rotate: false
+  xy: 1911, 720
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+mwalls3
+  rotate: false
+  xy: 1911, 598
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+mwallsw4
+  rotate: false
+  xy: 1911, 476
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+mwallx2
+  rotate: false
+  xy: 1911, 354
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+qw
+  rotate: false
+  xy: 1911, 232
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+qwd
+  rotate: false
+  xy: 1911, 110
+  size: 120, 120
+  orig: 120, 120
   offset: 0, 0
   index: -1
 
@@ -86,6 +133,36 @@ fone2-2
   xy: 2, 122
   size: 1080, 1920
   orig: 1080, 1920
+  offset: 0, 0
+  index: -1
+s
+  rotate: false
+  xy: 1913, 1226
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+wallsteel
+  rotate: false
+  xy: 2, 68
+  size: 269, 52
+  split: 34, 40, 0, 0
+  orig: 269, 52
+  offset: 0, 0
+  index: -1
+wallsteel1
+  rotate: false
+  xy: 1859, 1077
+  size: 52, 269
+  split: 0, 0, 0, 0
+  orig: 52, 269
+  offset: 0, 0
+  index: -1
+we
+  rotate: false
+  xy: 1913, 1104
+  size: 120, 120
+  orig: 120, 120
   offset: 0, 0
   index: -1
 

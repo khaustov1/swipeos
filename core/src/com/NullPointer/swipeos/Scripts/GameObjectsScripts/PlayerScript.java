@@ -140,22 +140,22 @@ public class PlayerScript implements IScript {
         }
     }
 
-    public void moveCharacter(float delta){
+    public void moveCharacter(float delta) {
         //Двигаем персонажа
         playerTransformComponent.x += playerSpeed.x * delta;
         playerTransformComponent.y += playerSpeed.y * delta;
 
         //Замедляем персонажа из-за трения
-        if(playerSpeed.x > 0){
+        if (playerSpeed.x > 0) {
             playerSpeed.x -= friction;
         }
-        if(playerSpeed.x < 0 && isX_AxisNegative){
+        if (playerSpeed.x < 0 && isX_AxisNegative) {
             playerSpeed.x += friction;
         }
-        if(playerSpeed.y > 0){
+        if (playerSpeed.y > 0) {
             playerSpeed.y -= friction;
         }
-        if(playerSpeed.y < 0 && isY_AxisNegative){
+        if (playerSpeed.y < 0 && isY_AxisNegative) {
             playerSpeed.y += friction;
         }
 

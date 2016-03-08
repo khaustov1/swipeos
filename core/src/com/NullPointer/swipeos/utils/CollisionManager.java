@@ -62,6 +62,8 @@ public class CollisionManager {
                     }
                     playerScript.playerSpeed.x = -playerScript.playerSpeed.x;
                     playerScript.playerSpeed.y = -playerScript.playerSpeed.y;
+
+                    break;
                 }
             }
             for (Iterator<Star> it = levelLoader.getLevelStars().iterator(); it.hasNext(); ) {

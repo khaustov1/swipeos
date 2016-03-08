@@ -89,7 +89,7 @@ public class LevelLoader {
 
     private void loadLevel_1(){
         int level = 1;
-        fillLevelWalls(2, level);
+        fillLevelWalls(4, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
         setLevelStartCoordinate(level);
@@ -97,7 +97,7 @@ public class LevelLoader {
 
     private void loadLevel_2(){
         int level = 2;
-        fillLevelWalls(2, level);
+        fillLevelWalls(4, level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
@@ -106,7 +106,7 @@ public class LevelLoader {
 
     private void loadLevel_3(){
         int level = 3;
-        fillLevelWalls(5, level);
+        fillLevelWalls(13, level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
