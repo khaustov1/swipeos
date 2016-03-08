@@ -15,10 +15,11 @@ public class startGameButtonScript implements IScript{
     private Entity entity;
     TransformComponent transformComponent;
     DimensionsComponent dimensionsComponent;
-    private float increment = 1f;
+    private float increment = 0.5f;
     private float startWidth;
     private float startHeight;
     private Vector2 center = new Vector2(0,0);
+    private float size = 25f;
 
     @Override
     public void init(Entity entity) {
@@ -34,12 +35,12 @@ public class startGameButtonScript implements IScript{
     @Override
     public void act(float delta) {
         if (increment > 0) {
-            if (dimensionsComponent.width <= startWidth + 50) {
+            if (dimensionsComponent.width <= startWidth + size) {
                 dimensionsComponent.width += increment;
                 dimensionsComponent.height += increment;
                 transformComponent.y = center.y - dimensionsComponent.height/2;
                 transformComponent.x = center.x - dimensionsComponent.width/2;
-            } else if (dimensionsComponent.width >= startWidth + 50) {
+            } else if (dimensionsComponent.width >= startWidth + size) {
                 increment = -increment;
             }
         }

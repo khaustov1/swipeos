@@ -5,6 +5,7 @@ import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
+import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.startGameButtonScript;
 import com.badlogic.ashley.core.Entity;
@@ -52,6 +53,7 @@ public class LevelLoader {
 
         itemWrapper.getChild("playButton").addScript(new PlayButtonScript(this.gameLoader, playButtonRectangle, playButtonEntity));
         itemWrapper.getChild("startButton").addScript(new startGameButtonScript());
+        itemWrapper.getChild("bg").addScript(new BackGroundScript());
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Calm.mp3"));
         menuMusic.setLooping(true);
         menuMusic.play();
