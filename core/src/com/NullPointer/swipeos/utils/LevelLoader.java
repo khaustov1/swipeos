@@ -3,7 +3,6 @@ package com.NullPointer.swipeos.utils;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
-import com.NullPointer.swipeos.Scripts.GameObjectsScripts.StarScript;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
@@ -19,7 +18,7 @@ import com.uwsoft.editor.renderer.components.NodeComponent;
 import com.uwsoft.editor.renderer.components.ScriptComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
-import com.uwsoft.editor.renderer.utils.ItemWrapper;
+
 
 
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class LevelLoader {
 
     private void loadLevel_1(){
         int level = 1;
-        fillLevelWalls(4, level);
+        fillLevelWalls(level);
         fillLevelPortal(level);
         setLevelStopWall(level);
         setLevelStartCoordinate(level);
@@ -97,7 +96,7 @@ public class LevelLoader {
 
     private void loadLevel_2(){
         int level = 2;
-        fillLevelWalls(4, level);
+        fillLevelWalls(level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
@@ -106,7 +105,7 @@ public class LevelLoader {
 
     private void loadLevel_3(){
         int level = 3;
-        fillLevelWalls(13, level);
+        fillLevelWalls(level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
@@ -115,7 +114,7 @@ public class LevelLoader {
 
     private void loadLevel_4(){
         int level = 4;
-        fillLevelWalls(9, level);
+        fillLevelWalls(level);
         fillLevelStars(3, level);
         fillLevelPortal(level);
         setLevelStopWall(level);
@@ -130,11 +129,11 @@ public class LevelLoader {
         }
     }
 
-    private void fillLevelWalls(int wallsCount, int level){
+    private void fillLevelWalls(int level){
         walls.clear();
-        for(int i = 0; i < wallsCount; i++){
-            Entity blockEntity = itemWrapper.getChild("wall"+level+"_" + i).getEntity();
-            walls.add(new Wall(blockEntity));
+        List<Entity> wallsList = itemWrapper.getChildrenContains("wall"+level+"_");
+        for(Entity wall : wallsList){
+            walls.add(new Wall(wall));
         }
     }
 

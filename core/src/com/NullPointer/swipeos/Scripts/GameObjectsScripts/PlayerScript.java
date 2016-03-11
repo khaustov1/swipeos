@@ -107,6 +107,7 @@ public class PlayerScript implements IScript {
     // Здесь идет обработка коллизий и изменение скорости во время рендеринга
     @Override
     public void act(float delta) {
+        gameLoader.getGame().updateCamera();
         speedLimit();
         moveCharacter(delta);
         CollisionManager.checkForCollision(this, levelLoader, playerCircle);

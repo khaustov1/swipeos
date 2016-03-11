@@ -4,6 +4,13 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+asblocksmall
+  rotate: false
+  xy: 1911, 48
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
 bgleft
   rotate: false
   xy: 1084, 4
@@ -90,7 +97,7 @@ filter: Linear,Linear
 repeat: none
 About
   rotate: false
-  xy: 1859, 1870
+  xy: 1859, 1874
   size: 172, 172
   split: 0, 0, 0, 0
   orig: 172, 172
@@ -98,7 +105,7 @@ About
   index: -1
 Exit
   rotate: false
-  xy: 1859, 1696
+  xy: 1859, 1700
   size: 172, 172
   split: 0, 0, 0, 0
   orig: 172, 172
@@ -106,7 +113,7 @@ Exit
   index: -1
 Play
   rotate: false
-  xy: 1859, 1522
+  xy: 1859, 1526
   size: 172, 172
   split: 0, 0, 0, 0
   orig: 172, 172
@@ -114,7 +121,7 @@ Play
   index: -1
 Sound
   rotate: false
-  xy: 1859, 1348
+  xy: 1859, 1352
   size: 172, 172
   split: 0, 0, 0, 0
   orig: 172, 172
@@ -122,29 +129,99 @@ Sound
   index: -1
 bgright
   rotate: false
-  xy: 1084, 2
+  xy: 1084, 6
   size: 773, 2040
   split: 0, 0, 0, 0
   orig: 773, 2040
   offset: 0, 0
   index: -1
+cvblocksmall
+  rotate: false
+  xy: 2, 10
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
+dblocksmallf
+  rotate: false
+  xy: 124, 10
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
+erblocksmall
+  rotate: false
+  xy: 273, 64
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
 fone2-2
   rotate: false
-  xy: 2, 122
+  xy: 2, 126
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
+qblocksmallw
+  rotate: false
+  xy: 246, 2
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
 s
   rotate: false
-  xy: 1913, 1226
+  xy: 1913, 1230
   size: 120, 120
   orig: 120, 120
   offset: 0, 0
   index: -1
+sblocksmalld
+  rotate: false
+  xy: 515, 65
+  size: 120, 59
+  orig: 120, 59
+  offset: 0, 0
+  index: -1
+smallverticala
+  rotate: false
+  xy: 1859, 959
+  size: 60, 120
+  orig: 60, 120
+  offset: 0, 0
+  index: -1
+smallverticale
+  rotate: false
+  xy: 1859, 837
+  size: 60, 120
+  orig: 60, 120
+  offset: 0, 0
+  index: -1
+smallverticalq
+  rotate: false
+  xy: 1859, 715
+  size: 60, 120
+  orig: 60, 120
+  offset: 0, 0
+  index: -1
+smallverticals
+  rotate: false
+  xy: 1859, 593
+  size: 60, 120
+  orig: 60, 120
+  offset: 0, 0
+  index: -1
+smallverticalw
+  rotate: false
+  xy: 1859, 471
+  size: 60, 120
+  orig: 60, 120
+  offset: 0, 0
+  index: -1
 wallsteel
   rotate: false
-  xy: 2, 68
+  xy: 2, 72
   size: 269, 52
   split: 34, 40, 0, 0
   orig: 269, 52
@@ -152,17 +229,38 @@ wallsteel
   index: -1
 wallsteel1
   rotate: false
-  xy: 1859, 1077
+  xy: 1859, 1081
   size: 52, 269
   split: 0, 0, 0, 0
   orig: 52, 269
   offset: 0, 0
   index: -1
+wblocksmalle
+  rotate: false
+  xy: 368, 2
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1
 we
   rotate: false
-  xy: 1913, 1104
+  xy: 1913, 1108
   size: 120, 120
   orig: 120, 120
+  offset: 0, 0
+  index: -1
+xblocksmallc
+  rotate: false
+  xy: 395, 64
+  size: 118, 60
+  orig: 118, 60
+  offset: 0, 0
+  index: -1
+zblocksmallx
+  rotate: false
+  xy: 637, 65
+  size: 120, 59
+  orig: 120, 59
   offset: 0, 0
   index: -1
 

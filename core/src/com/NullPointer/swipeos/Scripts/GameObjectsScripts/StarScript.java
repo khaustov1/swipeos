@@ -18,7 +18,7 @@ public class StarScript implements IScript{
     private float increment = 0.25f;
     private float startWidth;
     private Vector2 center = new Vector2(0,0);
-    private float size = 15f;
+    private float size = 10f;
 
     public StarScript(Entity entity){
         this.entity = entity;

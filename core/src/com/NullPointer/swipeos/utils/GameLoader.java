@@ -5,7 +5,7 @@ import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.uwsoft.editor.renderer.utils.ItemWrapper;
+
 
 /**
  * Created by Khaustov on 05.12.15.
@@ -117,5 +117,8 @@ public class GameLoader {
     public void loadCurrentScene(){
         this.isNeedToLoadScene = false;
         initializeGameStage_1_10();
+    }
+    public static Game getGame(){
+        return game;
     }
 }
