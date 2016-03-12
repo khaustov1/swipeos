@@ -1,20 +1,24 @@
 package com.NullPointer.swipeos;
 
+import com.NullPointer.swipeos.utils.CameraManager;
 import com.NullPointer.swipeos.utils.GameLoader;
 import com.NullPointer.swipeos.utils.ItemWrapper;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Game extends com.badlogic.gdx.Game {
 	public  Viewport       mainViewPort;
     public com.NullPointer.swipeos.utils.SceneLoader mainSceneLoader;
     public ItemWrapper mainItemWrapper;
+    public CameraManager cameraManager;
 
     private GameLoader gameLoader;
     private Game game;
     public static OnLoadListener onLoadListener;
+    private float oldCameraY = 320f;
 
     public Game(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
@@ -37,17 +41,5 @@ public class Game extends com.badlogic.gdx.Game {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         mainSceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
     }
-
-    public void updateCamera(){
-        if(gameLoader.getPlayerY()+110f < gameLoader.getCameraStopY() &&
-                gameLoader.getPlayerY()+110f > 320f)
-            ((OrthographicCamera) mainViewPort.getCamera()).position.set(gameLoader.getLevelXStartCoordinate(),
-                    gameLoader.getPlayerY() + 110f, 0);
-
-    }
-
-	public void setCameraCoords(float x, float y){
-		((OrthographicCamera) mainViewPort.getCamera()).position.set(x, y, 0);
-	}
 
 }

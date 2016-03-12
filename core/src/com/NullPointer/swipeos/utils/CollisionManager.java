@@ -46,7 +46,7 @@ public class CollisionManager {
                         playerCircle.setX(playerScript.playerTransformComponent.x + playerCircle.radius);
                         playerCircle.setY(playerScript.playerTransformComponent.y + playerCircle.radius);
                         playerScript.endCollision();
-                        playerScript.getGameLoader().SetCameraCoords(180, 320);
+                        playerScript.getGameLoader().getCameraManager().setCameraCoords(180, 320);
                         return;
                     }
 

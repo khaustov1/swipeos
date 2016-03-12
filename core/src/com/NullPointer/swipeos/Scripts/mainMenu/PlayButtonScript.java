@@ -37,7 +37,7 @@ public class PlayButtonScript implements IScript{
         transformComponent.rotation += 20 *delta;
         if(Gdx.input.justTouched()){
             Vector3 pos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            gameLoader.getMainCamera().unproject(pos);
+            gameLoader.getCameraManager().getCamera().unproject(pos);
             if(buttonRectangle.contains(pos.x,pos.y)){
                 gameLoader.removeAllEntities();
                 gameLoader.setSceneToLoad("levelPack1");

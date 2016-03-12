@@ -67,65 +67,18 @@ public class LevelLoader {
     }
 
     public void loadLevel(int level){
-        switch (level){
-            case 1:
-                loadLevel_1();
-                break;
-            case 2:
-                loadLevel_2();
-                break;
-            case 3:
-                loadLevel_3();
-                break;
-            case 4:
-                loadLevel_4();
-                break;
-            default:
-
-                break;
-        }
-    }
-
-    private void loadLevel_1(){
-        int level = 1;
         fillLevelWalls(level);
+        fillLevelStars(level);
         fillLevelPortal(level);
         setLevelStopWall(level);
         setLevelStartCoordinate(level);
     }
 
-    private void loadLevel_2(){
-        int level = 2;
-        fillLevelWalls(level);
-        fillLevelStars(3, level);
-        fillLevelPortal(level);
-        setLevelStopWall(level);
-        setLevelStartCoordinate(level);
-    }
-
-    private void loadLevel_3(){
-        int level = 3;
-        fillLevelWalls(level);
-        fillLevelStars(3, level);
-        fillLevelPortal(level);
-        setLevelStopWall(level);
-        setLevelStartCoordinate(level);
-    }
-
-    private void loadLevel_4(){
-        int level = 4;
-        fillLevelWalls(level);
-        fillLevelStars(3, level);
-        fillLevelPortal(level);
-        setLevelStopWall(level);
-        setLevelStartCoordinate(level);
-    }
-
-    private void fillLevelStars(int starsCount, int level){
+    private void fillLevelStars(int level){
         stars.clear();
-        for(int i = 0; i < starsCount; i++){
-            Entity starEntity = itemWrapper.getChild("star"+level+"_" + i).getEntity();
-            stars.add(new Star(starEntity));
+        List<Entity> starList = itemWrapper.getChildrenContains("star"+level+"_");
+        for(Entity star : starList){
+            stars.add(new Star(star));
         }
     }
 

@@ -37,7 +37,9 @@ public class GameLoader {
         levelLoader = new LevelLoader(game.mainItemWrapper, this);
         levelLoader.loadMainScreen();
 
-        game.setCameraCoords(180f, 320f);
+
+        game.cameraManager = new CameraManager((OrthographicCamera) game.mainViewPort.getCamera(), this);
+        game.cameraManager.setCameraCoords(180f, 320f);
         game.onLoadListener.onLoad();
     }
 
@@ -49,7 +51,7 @@ public class GameLoader {
         levelLoader.loadLevel(currentLevel);
         playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
-        game.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
+        game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
     }
 
 
@@ -57,7 +59,7 @@ public class GameLoader {
         ++currentLevel;
         levelLoader.loadLevel(currentLevel);
         playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
-        game.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
+        game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
     }
 
     public void showLevelCompleteWindow(){
@@ -77,9 +79,6 @@ public class GameLoader {
         return levelLoader.getLevelStopY();
     }
 
-    public void SetCameraCoords(float x, float y){
-        game.setCameraCoords(x, y);
-    }
 
     public float getLevelXStartCoordinate() {
         return levelXStartCoordinate;
@@ -91,11 +90,6 @@ public class GameLoader {
     public Vector3 getCameraCoordinates(){
         return game.mainViewPort.getCamera().position;
     }
-
-    public OrthographicCamera getMainCamera(){
-        return (OrthographicCamera) game.mainViewPort.getCamera();
-    }
-
 
     public boolean isPaused() {
         return paused;
@@ -120,5 +114,9 @@ public class GameLoader {
     }
     public static Game getGame(){
         return game;
+    }
+
+    public CameraManager getCameraManager(){
+        return game.cameraManager;
     }
 }

@@ -31,7 +31,7 @@ public class NextLevelButtonScript implements IScript{
     public void act(float delta) {
         if(Gdx.input.justTouched()){
             Vector3 pos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            gameLoader.getMainCamera().unproject(pos);
+            gameLoader.getCameraManager().getCamera().unproject(pos);
             if(buttonRectangle.contains(pos.x,pos.y)){
                 gameLoader.setPaused(false);
                 gameLoader.nextLevel();
