@@ -1,5 +1,6 @@
 package com.NullPointer.swipeos.utils;
 
+import com.NullPointer.swipeos.engine.EntityFactory;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.data.CompositeVO;
@@ -31,7 +32,6 @@ import com.uwsoft.editor.renderer.components.*;
 import com.uwsoft.editor.renderer.components.light.LightObjectComponent;
 import com.uwsoft.editor.renderer.components.physics.PhysicsBodyComponent;
 import com.uwsoft.editor.renderer.data.*;
-import com.uwsoft.editor.renderer.factory.EntityFactory;
 import com.uwsoft.editor.renderer.physics.PhysicsBodyLoader;
 import com.uwsoft.editor.renderer.resources.IResourceRetriever;
 import com.uwsoft.editor.renderer.resources.ResourceManager;

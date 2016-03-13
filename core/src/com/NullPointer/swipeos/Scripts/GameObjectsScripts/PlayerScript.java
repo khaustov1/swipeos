@@ -1,9 +1,8 @@
 package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
-import com.NullPointer.swipeos.utils.CollisionManager;
+import com.NullPointer.swipeos.engine.CollisionManager;
 import com.NullPointer.swipeos.utils.DirectionGestureDetector;
 import com.NullPointer.swipeos.utils.GameLoader;
-import com.NullPointer.swipeos.Objects.GameObject;
 import com.NullPointer.swipeos.utils.LevelLoader;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
@@ -13,8 +12,6 @@ import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
-
-import java.util.List;
 
 /**
  * Created by Khaustov on 05.12.15.

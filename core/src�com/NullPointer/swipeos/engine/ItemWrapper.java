@@ -1,4 +1,4 @@
-package com.NullPointer.swipeos.utils;
+package com.NullPointer.swipeos.engine;
 
 /**
  * Created by Khaustov on 12.03.16.

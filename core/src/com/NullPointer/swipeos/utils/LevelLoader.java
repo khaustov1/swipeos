@@ -30,14 +30,14 @@ import java.util.List;
 public class LevelLoader {
     private List<Wall> walls = new ArrayList<Wall>();
     private Portal portal;
-    private ItemWrapper itemWrapper;
+    private com.NullPointer.swipeos.engine.ItemWrapper itemWrapper;
     private GameLoader gameLoader;
     private Wall stopWall;
     private List<Star> stars = new ArrayList<Star>();
     private Music menuMusic;
 
 
-    public LevelLoader(ItemWrapper itemWrapper, GameLoader gameLoader)
+    public LevelLoader(com.NullPointer.swipeos.engine.ItemWrapper itemWrapper, GameLoader gameLoader)
     {
         this.itemWrapper = itemWrapper;
         this.gameLoader = gameLoader;

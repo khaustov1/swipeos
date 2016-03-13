@@ -1,8 +1,9 @@
-package com.NullPointer.swipeos.utils;
+package com.NullPointer.swipeos.engine;
 
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
+import com.NullPointer.swipeos.utils.LevelLoader;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 

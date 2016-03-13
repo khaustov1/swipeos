@@ -2,11 +2,9 @@ package com.NullPointer.swipeos;
 
 import com.NullPointer.swipeos.utils.CameraManager;
 import com.NullPointer.swipeos.utils.GameLoader;
-import com.NullPointer.swipeos.utils.ItemWrapper;
+import com.NullPointer.swipeos.engine.ItemWrapper;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Game extends com.badlogic.gdx.Game {
