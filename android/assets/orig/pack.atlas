@@ -19,7 +19,7 @@ bgleft
   orig: 825, 2040
   offset: 0, 0
   index: -1
-fone1-2
+fonefivefhd
   rotate: false
   xy: 2, 124
   size: 1080, 1920
@@ -156,7 +156,7 @@ erblocksmall
   orig: 120, 60
   offset: 0, 0
   index: -1
-fone2-2
+fonefourfhd
   rotate: false
   xy: 2, 126
   size: 1080, 1920
@@ -277,7 +277,7 @@ backForPopUp
   orig: 400, 400
   offset: 0, 0
   index: -1
-fone3-2
+foneonefhd
   rotate: false
   xy: 2, 86
   size: 1080, 1920
@@ -319,10 +319,147 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-fone4-2
+fonefiveleft
+  rotate: false
+  xy: 1084, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonefiveright
+  rotate: false
+  xy: 1346, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonefourleft
+  rotate: false
+  xy: 1608, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonetreefhd
   rotate: false
   xy: 2, 2
   size: 1080, 1920
   orig: 1080, 1920
+  offset: 0, 0
+  index: -1
+
+pack5.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fonefourright
+  rotate: false
+  xy: 1084, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+foneoneleft
+  rotate: false
+  xy: 1346, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+foneoneright
+  rotate: false
+  xy: 1608, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonetwofhd
+  rotate: false
+  xy: 2, 2
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: -1
+
+pack6.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+asteroid-png-1.jpg
+  rotate: false
+  xy: 1050, 1343
+  size: 687, 579
+  orig: 687, 579
+  offset: 0, 0
+  index: -1
+fonethreeleft
+  rotate: false
+  xy: 2, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonethreeright
+  rotate: false
+  xy: 264, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonetwoleft
+  rotate: false
+  xy: 526, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+fonetworight
+  rotate: false
+  xy: 788, 2
+  size: 260, 1920
+  orig: 260, 1920
+  offset: 0, 0
+  index: -1
+
+pack7.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fonefivetop
+  rotate: false
+  xy: 2, 522
+  size: 1600, 128
+  orig: 1600, 128
+  offset: 0, 0
+  index: -1
+fonefourtop
+  rotate: false
+  xy: 2, 392
+  size: 1600, 128
+  orig: 1600, 128
+  offset: 0, 0
+  index: -1
+foneonetop
+  rotate: false
+  xy: 2, 262
+  size: 1600, 128
+  orig: 1600, 128
+  offset: 0, 0
+  index: -1
+fonethreetop
+  rotate: false
+  xy: 2, 132
+  size: 1600, 128
+  orig: 1600, 128
+  offset: 0, 0
+  index: -1
+fonetwotop
+  rotate: false
+  xy: 2, 2
+  size: 1600, 128
+  orig: 1600, 128
   offset: 0, 0
   index: -1

@@ -1,8 +1,10 @@
 package com.NullPointer.swipeos.utils;
 
+import com.NullPointer.swipeos.Objects.Asteroid;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.AsteroidScript;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
@@ -35,6 +37,7 @@ public class LevelLoader {
     private Wall stopWall;
     private List<Star> stars = new ArrayList<Star>();
     private Music menuMusic;
+    private List<Asteroid> asteroids = new ArrayList<Asteroid>();
 
 
     public LevelLoader(com.NullPointer.swipeos.engine.ItemWrapper itemWrapper, GameLoader gameLoader)
@@ -72,6 +75,7 @@ public class LevelLoader {
         fillLevelPortal(level);
         setLevelStopWall(level);
         setLevelStartCoordinate(level);
+        fillLevelAsteroids(level);
     }
 
     private void fillLevelStars(int level){
@@ -87,6 +91,18 @@ public class LevelLoader {
         List<Entity> wallsList = itemWrapper.getChildrenContains("wall"+level+"_");
         for(Entity wall : wallsList){
             walls.add(new Wall(wall));
+        }
+    }
+
+    private void fillLevelAsteroids(int level){
+        asteroids.clear();
+        List<Entity> asteroidList = itemWrapper.getChildrenContains("asteroid"+level);
+        for(Entity asteroid : asteroidList){
+            Asteroid asteroidObject = new Asteroid(asteroid);
+            ScriptComponent scriptComponent = new ScriptComponent();
+            scriptComponent.addScript(new AsteroidScript(asteroidObject,150f));
+            asteroid.add(scriptComponent);
+            asteroids.add(asteroidObject);
         }
     }
 
@@ -164,4 +180,6 @@ public class LevelLoader {
     public Portal getLevelPortal(){
         return portal;
     }
+
+    public List<Asteroid> getLevelAsteroids(){return asteroids;}
 }

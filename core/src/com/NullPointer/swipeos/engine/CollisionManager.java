@@ -1,5 +1,6 @@
 package com.NullPointer.swipeos.engine;
 
+import com.NullPointer.swipeos.Objects.Asteroid;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
@@ -73,7 +74,13 @@ public class CollisionManager {
                     star.removeStar();
                 }
             }
-
+            for (Iterator<Asteroid> it = levelLoader.getLevelAsteroids().iterator(); it.hasNext(); ) {
+                Asteroid asteroid = it.next();
+                if (Intersector.overlaps(playerCircle, asteroid.getRectangle())) {
+                    playerScript.setPlayerСoordinates(playerScript.getGameLoader().getLevelXStartCoordinate(),
+                            45f);
+                }
+            }
             if (Intersector.overlaps(playerCircle, levelLoader.getLevelPortal().getPortalCircle())) {
                 playerScript.playerSpeed.x = 0;
                 playerScript.playerSpeed.y = 0;

@@ -32,7 +32,7 @@ public class GameLoader {
         game.mainViewPort = new ExtendViewport(360,640);
         game.mainSceneLoader = new SceneLoader();
         game.mainSceneLoader.loadScene("MainScene", game.mainViewPort);
-        game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
+        game.mainItemWrapper = new com.NullPointer.swipeos.engine.ItemWrapper(game.mainSceneLoader.getRoot());
         //// TODO: добавить загрузку последнего уровня для игрока
         levelLoader = new LevelLoader(game.mainItemWrapper, this);
         levelLoader.loadMainScreen();
@@ -45,7 +45,7 @@ public class GameLoader {
 
     public void initializeGameStage_1_10(){
         game.mainSceneLoader.loadScene("levelPack1", game.mainViewPort, this);
-        game.mainItemWrapper = new ItemWrapper(game.mainSceneLoader.getRoot());
+        game.mainItemWrapper = new com.NullPointer.swipeos.engine.ItemWrapper(game.mainSceneLoader.getRoot());
         //// TODO: добавить загрузку последнего уровня для игрока
         levelLoader = new LevelLoader(game.mainItemWrapper, this);
         levelLoader.loadLevel(currentLevel);
