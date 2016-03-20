@@ -1,6 +1,7 @@
 package com.NullPointer.swipeos.Objects;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
@@ -10,33 +11,36 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  * Created by Khaustov on 13.03.16.
  */
 public class Asteroid implements GameObject{
-    private Rectangle asteroidRectangle;
+    private Circle asteroidCircle;
     private TransformComponent transformComponent;
     private DimensionsComponent dimensionsComponent;
     boolean isDeadly;
+    float circleXdifferenece = 0f;
+    float circleYdifference = 0f;
 
     public  Asteroid(Entity entity){
         isDeadly = true;
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
-        dimensionsComponent.width = dimensionsComponent.width/2;
-        dimensionsComponent.height = dimensionsComponent.height/2;
-        asteroidRectangle = new Rectangle(transformComponent.x, transformComponent.y,
-                dimensionsComponent.width, dimensionsComponent.height);
+        circleXdifferenece = dimensionsComponent.width/2;
+        circleYdifference = dimensionsComponent.height/2;
+
+        asteroidCircle = new Circle(transformComponent.x + circleXdifferenece,
+                transformComponent.y + circleYdifference, circleYdifference);
     }
 
-    public Rectangle getRectangle(){
-        return asteroidRectangle;
+    public Circle getAsteroidCircle(){
+        return asteroidCircle;
     }
 
     public void setX(float x){
         transformComponent.x = x;
-        asteroidRectangle.setX(x);
+        asteroidCircle.setX(x);
     }
 
     public void setY(float y){
         transformComponent.y = y;
-        asteroidRectangle.setY(y);
+        asteroidCircle.setY(y);
     }
 
     public float getX(){
@@ -49,30 +53,21 @@ public class Asteroid implements GameObject{
 
     public void setPosition(float x, float y){
         transformComponent.x = x;
-        asteroidRectangle.setX(x);
+        asteroidCircle.setX(x);
         transformComponent.y = y;
-        asteroidRectangle.setY(y);
+        asteroidCircle.setY(y);
     }
 
     public void increaseX(float increaseValue){
         transformComponent.x += increaseValue;
-        asteroidRectangle.setX(transformComponent.x);
-    }
-
-    public void decreaseX(float decreaseValue){
-        transformComponent.x -= decreaseValue;
-        asteroidRectangle.setX(transformComponent.x);
+        asteroidCircle.setX(transformComponent.x+circleXdifferenece);
     }
 
     public void increaseY(float increaseValue){
         transformComponent.y += increaseValue;
-        asteroidRectangle.setY(transformComponent.y);
+        asteroidCircle.setY(transformComponent.y+circleYdifference);
     }
 
-    public void decreaseY(float decreaseValue){
-        transformComponent.y -= decreaseValue;
-        asteroidRectangle.setY(transformComponent.y);
-    }
 
     public TransformComponent getTransformComponent(){
         return this.transformComponent;

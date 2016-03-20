@@ -32,7 +32,7 @@ public class AsteroidScript implements IScript{
     public void act(float delta) {
         asteroid.increaseX(movingSpeed*delta);
         asteroid.increaseY(range*delta);
-        //asteroid.getTransformComponent().rotation += 40*delta;
+        asteroid.getTransformComponent().rotation += 40*delta;
             if (!back) {
                 if (asteroid.getX() >= to) {
                     movingSpeed = -movingSpeed;

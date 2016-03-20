@@ -387,11 +387,11 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-asteroid-png-1.jpg
+asteroid
   rotate: false
-  xy: 1050, 1343
-  size: 687, 579
-  orig: 687, 579
+  xy: 1050, 1716
+  size: 221, 206
+  orig: 221, 206
   offset: 0, 0
   index: -1
 fonethreeleft

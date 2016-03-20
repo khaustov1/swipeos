@@ -76,7 +76,7 @@ public class CollisionManager {
             }
             for (Iterator<Asteroid> it = levelLoader.getLevelAsteroids().iterator(); it.hasNext(); ) {
                 Asteroid asteroid = it.next();
-                if (Intersector.overlaps(playerCircle, asteroid.getRectangle())) {
+                if (Intersector.overlaps(playerCircle, asteroid.getAsteroidCircle())) {
                     playerScript.setPlayerСoordinates(playerScript.getGameLoader().getLevelXStartCoordinate(),
                             45f);
                 }
