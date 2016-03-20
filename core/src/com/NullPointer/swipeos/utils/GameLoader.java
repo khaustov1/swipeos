@@ -59,6 +59,7 @@ public class GameLoader {
         ++currentLevel;
         levelLoader.loadLevel(currentLevel);
         playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
+        game.cameraManager.stopMoving();
         game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
     }
 

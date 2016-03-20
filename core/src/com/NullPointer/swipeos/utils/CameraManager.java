@@ -17,6 +17,12 @@ public class CameraManager {
         this.gameLoader = gameLoader;
     }
 
+    public void stopMoving(){
+        isMovingBack = false;
+        isMovingNow = false;
+        moveToCoordinate = 0f;
+    }
+
     public void updateCamera(float delta){
         if(isMovingNow){
             if(isMovingBack){
