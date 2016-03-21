@@ -43,14 +43,16 @@ public class GameLoader {
         game.onLoadListener.onLoad();
     }
 
-    public void initializeGameStage_1_10(){
-        game.mainSceneLoader.loadScene("levelPack1", game.mainViewPort, this);
+    public void loadStage(){
+        game.mainSceneLoader.loadScene(sceneToLoad, game.mainViewPort, this);
         game.mainItemWrapper = new com.NullPointer.swipeos.engine.ItemWrapper(game.mainSceneLoader.getRoot());
         //// TODO: добавить загрузку последнего уровня для игрока
         levelLoader = new LevelLoader(game.mainItemWrapper, this);
         levelLoader.loadLevel(currentLevel);
         playerScript = new PlayerScript(levelLoader, this);
         game.mainItemWrapper.getChild("player").addScript(playerScript);
+        playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
+        game.cameraManager.stopMoving();
         game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
     }
 
@@ -102,6 +104,7 @@ public class GameLoader {
 
     public void removeAllEntities(){
         game.mainSceneLoader.removeAllEntities();
+
     }
 
     public void setSceneToLoad(String sceneToLoad){
@@ -111,8 +114,13 @@ public class GameLoader {
 
     public void loadCurrentScene(){
         this.isNeedToLoadScene = false;
-        initializeGameStage_1_10();
+        loadStage();
     }
+
+    public void setCurrentLevel(int level){
+        this.currentLevel = level;
+    }
+
     public static Game getGame(){
         return game;
     }

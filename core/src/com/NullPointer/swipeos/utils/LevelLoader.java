@@ -9,6 +9,7 @@ import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
+import com.NullPointer.swipeos.Scripts.mainMenu.StartStageScript;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -62,8 +63,13 @@ public class LevelLoader {
         dustTransformComponent.scaleY = 1.5f;
         dustTransformComponent.scaleX = 1.5f;
 
-        itemWrapper.getChild("playButton").addScript(new PlayButtonScript(this.gameLoader, playButtonRectangle, playButtonEntity));
+        itemWrapper.getChild("playButton").addScript(new PlayButtonScript(gameLoader, playButtonRectangle, playButtonEntity));
         itemWrapper.getChild("bg").addScript(new BackGroundScript());
+        itemWrapper.getChild("bg1").addScript(new BackGroundScript());
+        Entity loadStage1Entity = itemWrapper.getChild("stage1Button").getEntity();
+        itemWrapper.getChild("stage1Button").addScript(new StartStageScript(gameLoader, loadStage1Entity, 1));
+        Entity loadStage2Entity = itemWrapper.getChild("stage2Button").getEntity();
+        itemWrapper.getChild("stage2Button").addScript(new StartStageScript(gameLoader, loadStage2Entity, 2));
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Calm.mp3"));
         menuMusic.setLooping(true);
         menuMusic.play();
