@@ -11,6 +11,7 @@ public class CameraManager {
     private boolean isMovingNow;
     private boolean isMovingBack;
     private float moveToCoordinate = 0f;
+    private float movingSpeed = 0f;
 
     public CameraManager(OrthographicCamera camera, GameLoader gameLoader){
         this.camera = camera;
