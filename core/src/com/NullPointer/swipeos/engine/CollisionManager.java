@@ -43,12 +43,8 @@ public class CollisionManager {
                     playerScript.startCollision();
 
                     if (wall.isDeadly()) {
-                        playerScript.playerTransformComponent.x = 230;
-                        playerScript.playerTransformComponent.y = 26;
-                        playerCircle.setX(playerScript.playerTransformComponent.x + playerCircle.radius);
-                        playerCircle.setY(playerScript.playerTransformComponent.y + playerCircle.radius);
-                        playerScript.endCollision();
-                        playerScript.getGameLoader().getCameraManager().setCameraCoords(180, 320);
+                        playerScript.setPlayerСoordinates(playerScript.getGameLoader().getLevelXStartCoordinate(),
+                                45f);
                         return;
                     }
 

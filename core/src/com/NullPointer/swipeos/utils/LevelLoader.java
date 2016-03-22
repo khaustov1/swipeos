@@ -5,6 +5,7 @@ import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.AsteroidScript;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.MovingWallScript;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Logger;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.MainItemComponent;
 import com.uwsoft.editor.renderer.components.NodeComponent;
@@ -26,6 +28,8 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import sun.rmi.runtime.Log;
 
 /**
  * Created by Khaustov on 04.01.16.
@@ -82,6 +86,7 @@ public class LevelLoader {
         setLevelStopWall(level);
         setLevelStartCoordinate(level);
         fillLevelAsteroids(level);
+        fillLevelMovingWalls(level);
     }
 
     private void fillLevelStars(int level){
@@ -89,6 +94,36 @@ public class LevelLoader {
         List<Entity> starList = itemWrapper.getChildrenContains("star"+level+"_");
         for(Entity star : starList){
             stars.add(new Star(star));
+        }
+    }
+
+    private void fillLevelMovingWalls(int level){
+        List<Entity> movingWallsList = itemWrapper.getChildrenContains("moving"+level);
+        for (Entity movingWall : movingWallsList){
+            try {
+                Wall currentWall = new Wall(movingWall);
+                ScriptComponent scriptComponent = new ScriptComponent();
+                MainItemComponent mainItemComponent = movingWall.getComponent(MainItemComponent.class);
+                String info = mainItemComponent.itemIdentifier.substring(
+                        mainItemComponent.itemIdentifier.indexOf(":") + 1
+                );
+                char axis = info.charAt(0);
+                String[] fromAndToAsString = info.substring(2).split("[\\t\\u007c]");
+                int from = Integer.parseInt(fromAndToAsString[0]);
+                int to = Integer.parseInt(fromAndToAsString[1]);
+                int speed = Integer.parseInt(fromAndToAsString[2]);
+                scriptComponent.addScript(new MovingWallScript(currentWall,
+                        axis,
+                        currentWall.getX() + from,
+                        currentWall.getX() + to,
+                        speed));
+                currentWall.setIsDeadly(true);
+                movingWall.add(scriptComponent);
+                walls.add(currentWall);
+            }
+            catch (Exception e){
+                e.toString();
+            }
         }
     }
 
