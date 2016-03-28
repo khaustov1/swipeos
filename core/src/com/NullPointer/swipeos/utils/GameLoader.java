@@ -2,6 +2,7 @@ package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Game;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
+import com.NullPointer.swipeos.engine.ItemWrapper;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -59,10 +60,19 @@ public class GameLoader {
 
     public void nextLevel() {
         ++currentLevel;
-        levelLoader.loadLevel(currentLevel);
-        playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
-        game.cameraManager.stopMoving();
-        game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
+        switch (currentLevel){
+            case 6:
+                removeAllEntities();
+                sceneToLoad = "levelPack2";
+                isNeedToLoadScene = true;
+                break;
+                default:
+                    levelLoader.loadLevel(currentLevel);
+                    playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
+                    game.cameraManager.stopMoving();
+                    game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
+                    break;
+        }
     }
 
     public void showLevelCompleteWindow(){
@@ -127,5 +137,9 @@ public class GameLoader {
 
     public CameraManager getCameraManager(){
         return game.cameraManager;
+    }
+
+    public ItemWrapper getItemWrapper(){
+        return game.mainItemWrapper;
     }
 }

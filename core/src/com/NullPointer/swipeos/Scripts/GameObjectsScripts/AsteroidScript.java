@@ -19,7 +19,7 @@ public class AsteroidScript implements IScript{
     public AsteroidScript(Asteroid asteroid, float speed){
         this.asteroid = asteroid;
         this.from = asteroid.getX();
-        this.to = asteroid.getX() + 700f;
+        this.to = asteroid.getX() + 300f;
         movingSpeed = speed;
     }
 

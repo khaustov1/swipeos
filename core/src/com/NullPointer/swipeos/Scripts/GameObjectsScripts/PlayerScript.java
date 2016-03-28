@@ -6,12 +6,24 @@ import com.NullPointer.swipeos.utils.GameLoader;
 import com.NullPointer.swipeos.utils.LevelLoader;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
+import com.uwsoft.editor.renderer.components.TextureRegionComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
+import com.uwsoft.editor.renderer.components.sprite.SpriteAnimationComponent;
+import com.uwsoft.editor.renderer.components.sprite.SpriteAnimationStateComponent;
+import com.uwsoft.editor.renderer.data.FrameRange;
+import com.uwsoft.editor.renderer.data.SpriteAnimationVO;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
+
+import java.util.HashMap;
 
 /**
  * Created by Khaustov on 05.12.15.
@@ -20,6 +32,8 @@ public class PlayerScript implements IScript {
 
     private GameLoader gameLoader;
     private LevelLoader levelLoader;
+
+    public static boolean isAlive = true;
 
     public  TransformComponent    playerTransformComponent; //для получения координат персонажа
     public  DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
@@ -30,13 +44,12 @@ public class PlayerScript implements IScript {
     private int       speedLimit = 250;
 
     private Circle    playerCircle;
+    private Entity    playerEntity;
 
     boolean isX_AxisNegative; // проверяем направление движения игрока
     boolean isY_AxisNegative; // проверяем направление движения игрока
 
     boolean isCollidingNow; // Флаг для того, чтобы не менять направление игрока во время коллизии
-
-    boolean checkForCollision;
 
     public PlayerScript(LevelLoader levelLoader, GameLoader gameLoader){
         this.levelLoader = levelLoader;
@@ -45,6 +58,8 @@ public class PlayerScript implements IScript {
 
     @Override
     public void init(Entity entity) {
+        playerEntity = entity;
+
         //Получаю компоненты игрока
         playerTransformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         playerDimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
@@ -171,4 +186,21 @@ public class PlayerScript implements IScript {
     }
 
     public LevelLoader getLevelLoader(){return levelLoader;}
+
+    public void die(){
+        isAlive = false;
+        Entity deadEntity = gameLoader.getItemWrapper().getChild("dead").getEntity();
+        SpriteAnimationComponent deadSpriteComponent = deadEntity.getComponent(SpriteAnimationComponent.class);
+        TextureRegionComponent deadTextureComponent = deadEntity.getComponent(TextureRegionComponent.class);
+        SpriteAnimationStateComponent deadStateComponent = deadEntity.getComponent(SpriteAnimationStateComponent.class);
+        playerEntity.remove(SpriteAnimationComponent.class);
+        playerEntity.remove(TextureRegionComponent.class);
+        playerEntity.remove(SpriteAnimationStateComponent.class);
+        playerEntity.add(deadSpriteComponent);
+        playerEntity.add(deadTextureComponent);
+        playerEntity.add(deadStateComponent);
+        //SpriteAnimationStateComponent playerSprite = playerEntity.getComponent(SpriteAnimationStateComponent.class);
+        //playerSprite.get().setPlayMode(Animation.PlayMode.NORMAL);
+        //playerSprite.set(deadSpriteComponent.frameRangeMap.get("Default"), 6, Animation.PlayMode.NORMAL);
+    }
 }

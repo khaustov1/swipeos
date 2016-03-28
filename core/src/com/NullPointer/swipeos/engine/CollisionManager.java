@@ -16,9 +16,8 @@ import java.util.Iterator;
 public class CollisionManager {
 
     public static void checkForCollision(PlayerScript playerScript, LevelLoader levelLoader, Circle playerCircle) {
-
         // Проверка коллизий
-        if(playerScript.playerTransformComponent.y < 0){
+        if (playerScript.playerTransformComponent.y < 0) {
             playerScript.startCollision();
 
             if (playerScript.playerSpeed.y > 0) {
@@ -35,8 +34,7 @@ public class CollisionManager {
             playerScript.playerSpeed.y = -playerScript.playerSpeed.y;
             playerScript.endCollision();
 
-        }
-        else {
+        } else {
             for (Wall wall : levelLoader.getLevelWalls()) {
                 if (Intersector.overlaps(playerCircle, wall.getWallRectangle())) {
                     //Коллизия началась
@@ -72,9 +70,11 @@ public class CollisionManager {
             }
             for (Iterator<Asteroid> it = levelLoader.getLevelAsteroids().iterator(); it.hasNext(); ) {
                 Asteroid asteroid = it.next();
-                if (Intersector.overlaps(playerCircle, asteroid.getAsteroidCircle())) {
-                    playerScript.setPlayerСoordinates(playerScript.getGameLoader().getLevelXStartCoordinate(),
-                            45f);
+                if (Intersector.overlaps(playerCircle, asteroid.getAsteroidCircle()) && playerScript.isAlive) {
+                    //playerScript.setPlayerСoordinates(playerScript.getGameLoader().getLevelXStartCoordinate(),
+                    //       45f);
+                    playerScript.die();
+
                 }
             }
             if (Intersector.overlaps(playerCircle, levelLoader.getLevelPortal().getPortalCircle())) {
@@ -85,6 +85,6 @@ public class CollisionManager {
             //Коллизия закончилась
             playerScript.endCollision();
         }
-    }
 
+    }
 }

@@ -87,6 +87,7 @@ public class LevelLoader {
         setLevelStartCoordinate(level);
         fillLevelAsteroids(level);
         fillLevelMovingWalls(level);
+        clearRender();
     }
 
     private void fillLevelStars(int level){
@@ -94,6 +95,22 @@ public class LevelLoader {
         List<Entity> starList = itemWrapper.getChildrenContains("star"+level+"_");
         for(Entity star : starList){
             stars.add(new Star(star));
+        }
+    }
+
+    private void clearRender(){
+        float levelStartX = stopWall.getWallRectangle().getX();
+        float levelEndX = levelStartX + stopWall.getWallRectangle().width;
+
+        for(Entity stageEntity : gameLoader.getGame().mainSceneLoader.getEngine().getEntities()){
+            TransformComponent entityTransformComponent = stageEntity.getComponent(TransformComponent.class);
+            MainItemComponent entityMainItemComponent = stageEntity.getComponent(MainItemComponent.class);
+            if(entityTransformComponent.x > levelStartX && entityTransformComponent.x < levelEndX){
+                entityMainItemComponent.visible = true;
+            }
+            else {
+                entityMainItemComponent.visible = false;
+            }
         }
     }
 
