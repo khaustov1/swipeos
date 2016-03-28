@@ -13,7 +13,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
+import com.uwsoft.editor.renderer.components.MainItemComponent;
 import com.uwsoft.editor.renderer.components.TextureRegionComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.components.sprite.SpriteAnimationComponent;
@@ -33,7 +35,7 @@ public class PlayerScript implements IScript {
     private GameLoader gameLoader;
     private LevelLoader levelLoader;
 
-    public static boolean isAlive = true;
+    private static boolean isAlive = true;
 
     public  TransformComponent    playerTransformComponent; //для получения координат персонажа
     public  DimensionsComponent   playerDimensionsComponent; //получение размеров персонажа
@@ -50,6 +52,8 @@ public class PlayerScript implements IScript {
     boolean isY_AxisNegative; // проверяем направление движения игрока
 
     boolean isCollidingNow; // Флаг для того, чтобы не менять направление игрока во время коллизии
+
+    private Entity deathAnimationEntity;
 
     public PlayerScript(LevelLoader levelLoader, GameLoader gameLoader){
         this.levelLoader = levelLoader;
@@ -189,18 +193,43 @@ public class PlayerScript implements IScript {
 
     public void die(){
         isAlive = false;
+
+        setPlayerСoordinates(getGameLoader().getLevelXStartCoordinate(),
+               -500f);
+        playerSpeed.x = playerSpeed.y = 0;
+
+        getGameLoader().getCameraManager().stop();
+
         Entity deadEntity = gameLoader.getItemWrapper().getChild("dead").getEntity();
-        SpriteAnimationComponent deadSpriteComponent = deadEntity.getComponent(SpriteAnimationComponent.class);
-        TextureRegionComponent deadTextureComponent = deadEntity.getComponent(TextureRegionComponent.class);
-        SpriteAnimationStateComponent deadStateComponent = deadEntity.getComponent(SpriteAnimationStateComponent.class);
-        playerEntity.remove(SpriteAnimationComponent.class);
-        playerEntity.remove(TextureRegionComponent.class);
-        playerEntity.remove(SpriteAnimationStateComponent.class);
-        playerEntity.add(deadSpriteComponent);
-        playerEntity.add(deadTextureComponent);
-        playerEntity.add(deadStateComponent);
-        //SpriteAnimationStateComponent playerSprite = playerEntity.getComponent(SpriteAnimationStateComponent.class);
-        //playerSprite.get().setPlayMode(Animation.PlayMode.NORMAL);
-        //playerSprite.set(deadSpriteComponent.frameRangeMap.get("Default"), 6, Animation.PlayMode.NORMAL);
+
+        SpriteAnimationVO spriteAnimationVO = new SpriteAnimationVO();
+        spriteAnimationVO.loadFromEntity(deadEntity);
+        spriteAnimationVO.x = playerCircle.x;
+        spriteAnimationVO.y = playerCircle.y;
+        spriteAnimationVO.layerName = "popup";
+        spriteAnimationVO.scaleX = 3;
+        spriteAnimationVO.scaleY = 3;
+        deathAnimationEntity = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
+                gameLoader.getGame().mainSceneLoader.getRoot(), spriteAnimationVO);
+        gameLoader.getGame().mainSceneLoader.getEngine().addEntity(deathAnimationEntity);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                alive();
+            }
+        }, 2);
+    }
+
+    public void alive(){
+        isAlive = true;
+        gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(deathAnimationEntity);
+        setPlayerСoordinates(getGameLoader().getLevelXStartCoordinate(),
+               45f);
+        getGameLoader().getCameraManager().start();
+        Timer.instance().clear();
+    }
+
+    public boolean isAlive(){
+        return isAlive;
     }
 }
