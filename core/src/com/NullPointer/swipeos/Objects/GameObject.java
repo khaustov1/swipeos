@@ -6,4 +6,7 @@ package com.NullPointer.swipeos.Objects;
 public interface GameObject {
     public boolean isDeadly();
 
+    public void setY(float y);
+    public void setX(float y);
+
 }

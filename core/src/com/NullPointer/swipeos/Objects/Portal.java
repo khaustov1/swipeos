@@ -20,4 +20,14 @@ public class Portal implements GameObject {
     public boolean isDeadly() {
         return false;
     }
+
+    @Override
+    public void setY(float y) {
+
+    }
+
+    @Override
+    public void setX(float y) {
+
+    }
 }

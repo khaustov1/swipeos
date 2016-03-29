@@ -1,0 +1,76 @@
+
+frame-.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+frame-001
+  rotate: false
+  xy: 2, 342
+  size: 72, 71
+  orig: 72, 71
+  offset: 0, 0
+  index: -1
+frame-002
+  rotate: false
+  xy: 2, 274
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-003
+  rotate: false
+  xy: 76, 347
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-004
+  rotate: false
+  xy: 2, 206
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-005
+  rotate: false
+  xy: 143, 347
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-006
+  rotate: false
+  xy: 2, 138
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-007
+  rotate: false
+  xy: 210, 347
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-008
+  rotate: false
+  xy: 2, 70
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-009
+  rotate: false
+  xy: 277, 347
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1
+frame-010
+  rotate: false
+  xy: 2, 2
+  size: 65, 66
+  orig: 65, 66
+  offset: 0, 0
+  index: -1

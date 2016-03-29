@@ -23,8 +23,6 @@ public class Star implements GameObject {
         starEntity = entity;
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
-        //dimensionsComponent.width = dimensionsComponent.width/2;
-        //dimensionsComponent.height = dimensionsComponent.height/2;
         starRectangle = new Rectangle(transformComponent.x, transformComponent.y,
                 dimensionsComponent.width, dimensionsComponent.height);
         ScriptComponent scriptComponent = new ScriptComponent();
@@ -35,6 +33,16 @@ public class Star implements GameObject {
     @Override
     public boolean isDeadly() {
         return false;
+    }
+
+    @Override
+    public void setY(float y) {
+
+    }
+
+    @Override
+    public void setX(float y) {
+
     }
 
     public Rectangle getStarRectangle(){
