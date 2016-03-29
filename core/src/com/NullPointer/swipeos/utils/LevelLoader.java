@@ -154,11 +154,29 @@ public class LevelLoader {
 
     private void fillLevelAsteroids(int level){
         asteroids.clear();
+        float range;
         List<Entity> asteroidList = itemWrapper.getChildrenContains("asteroid"+level);
         for(Entity asteroid : asteroidList){
             Asteroid asteroidObject = new Asteroid(asteroid);
             ScriptComponent scriptComponent = new ScriptComponent();
-            scriptComponent.addScript(new AsteroidScript(asteroidObject,150f));
+            MainItemComponent mainItemComponent = asteroid.getComponent(MainItemComponent.class);
+            String itemIdentifier = mainItemComponent.itemIdentifier;
+            try {
+                range = Float.parseFloat(itemIdentifier.substring(itemIdentifier.indexOf(":")+1));
+            }
+            catch (Exception e){
+                range = 40f;
+            }
+            if(itemIdentifier.contains("asteroid"+level+"_r")){
+                scriptComponent.addScript(new AsteroidScript(asteroidObject,150f,
+                        asteroidObject.getX() - 300f,
+                        true, range));
+            }
+            else {
+                scriptComponent.addScript(new AsteroidScript(asteroidObject, 150f,
+                        asteroidObject.getX() + 300f,
+                        false, range));
+            }
             asteroid.add(scriptComponent);
             asteroids.add(asteroidObject);
         }

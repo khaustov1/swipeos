@@ -15,12 +15,18 @@ public class AsteroidScript implements IScript{
     float movingSpeed = 0f;
     float range = 40f;
     boolean back;
+    boolean reverse;
 
-    public AsteroidScript(Asteroid asteroid, float speed){
+    public AsteroidScript(Asteroid asteroid, float speed, float moveTo, boolean reverse, float range){
         this.asteroid = asteroid;
         this.from = asteroid.getX();
-        this.to = asteroid.getX() + 300f;
+        this.to = moveTo;
+        this.reverse = reverse;
         movingSpeed = speed;
+        this.range = range;
+        if(reverse){
+            movingSpeed = -movingSpeed;
+        }
     }
 
     @Override
@@ -30,9 +36,10 @@ public class AsteroidScript implements IScript{
 
     @Override
     public void act(float delta) {
-        asteroid.increaseX(movingSpeed*delta);
+        asteroid.increaseX(movingSpeed * delta);
         asteroid.increaseY(range*delta);
         asteroid.getTransformComponent().rotation += 40*delta;
+        if(!reverse) {
             if (!back) {
                 if (asteroid.getX() >= to) {
                     movingSpeed = -movingSpeed;
@@ -46,6 +53,22 @@ public class AsteroidScript implements IScript{
                     back = false;
                 }
             }
+        }
+        else {
+            if (!back) {
+                if (asteroid.getX() <= to) {
+                    movingSpeed = -movingSpeed;
+                    range = -range;
+                    back = true;
+                }
+            } else {
+                if (asteroid.getX() >= from) {
+                    movingSpeed = -movingSpeed;
+                    range = -range;
+                    back = false;
+                }
+            }
+        }
     }
 
     @Override
