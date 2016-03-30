@@ -1,6 +1,7 @@
 package com.NullPointer.swipeos.utils;
 
 import com.NullPointer.swipeos.Objects.Asteroid;
+import com.NullPointer.swipeos.Objects.GameObject;
 import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
@@ -27,6 +28,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import sun.rmi.runtime.Log;
@@ -43,6 +45,7 @@ public class LevelLoader {
     private List<Star> stars = new ArrayList<Star>();
     private Music menuMusic;
     private List<Asteroid> asteroids = new ArrayList<Asteroid>();
+    private List<GameObject> gameObjectList = new ArrayList<GameObject>();
 
 
     public LevelLoader(com.NullPointer.swipeos.engine.ItemWrapper itemWrapper, GameLoader gameLoader)
@@ -80,14 +83,23 @@ public class LevelLoader {
     }
 
     public void loadLevel(int level){
+        fillLevelContent(level);
+        clearRender();
+    }
+
+    private void fillLevelContent(int level){
+        gameObjectList.clear();
         fillLevelWalls(level);
         fillLevelStars(level);
         fillLevelPortal(level);
-        setLevelStopWall(level);
-        setLevelStartCoordinate(level);
         fillLevelAsteroids(level);
         fillLevelMovingWalls(level);
-        clearRender();
+        setLevelStopWall(level);
+        setLevelStartCoordinate(level);
+        gameObjectList.addAll(asteroids);
+        gameObjectList.addAll(stars);
+        gameObjectList.addAll(walls);
+        gameObjectList.add(portal);
     }
 
     private void fillLevelStars(int level){
@@ -162,7 +174,7 @@ public class LevelLoader {
             MainItemComponent mainItemComponent = asteroid.getComponent(MainItemComponent.class);
             String itemIdentifier = mainItemComponent.itemIdentifier;
             try {
-                range = Float.parseFloat(itemIdentifier.substring(itemIdentifier.indexOf(":")+1));
+                range = Float.parseFloat(itemIdentifier.substring(itemIdentifier.indexOf(":") + 1));
             }
             catch (Exception e){
                 range = 40f;
@@ -245,17 +257,7 @@ public class LevelLoader {
         gameLoader.setLevelXStartCoordinate(transformComponent.x+180f);
     }
 
-    public List<Wall> getLevelWalls(){
-        return walls;
+    public List<GameObject> getGameObjectList(){
+        return gameObjectList;
     }
-
-    public List<Star> getLevelStars(){
-        return stars;
-    }
-
-    public Portal getLevelPortal(){
-        return portal;
-    }
-
-    public List<Asteroid> getLevelAsteroids(){return asteroids;}
 }

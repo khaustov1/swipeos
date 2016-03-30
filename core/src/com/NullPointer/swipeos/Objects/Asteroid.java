@@ -1,8 +1,8 @@
 package com.NullPointer.swipeos.Objects;
 
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PlayerScript;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
@@ -10,7 +10,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 /**
  * Created by Khaustov on 13.03.16.
  */
-public class Asteroid implements GameObject{
+public class Asteroid extends GameObject{
     private Circle asteroidCircle;
     private TransformComponent transformComponent;
     private DimensionsComponent dimensionsComponent;
@@ -27,6 +27,7 @@ public class Asteroid implements GameObject{
 
         asteroidCircle = new Circle(transformComponent.x + circleXdifferenece,
                 transformComponent.y + circleYdifference, circleYdifference);
+        shape = new Shape<Circle>(asteroidCircle);
     }
 
     public Circle getAsteroidCircle(){
@@ -65,7 +66,7 @@ public class Asteroid implements GameObject{
 
     public void increaseY(float increaseValue){
         transformComponent.y += increaseValue;
-        asteroidCircle.setY(transformComponent.y+circleYdifference);
+        asteroidCircle.setY(transformComponent.y + circleYdifference);
     }
 
 
@@ -77,6 +78,11 @@ public class Asteroid implements GameObject{
     @Override
     public boolean isDeadly() {
         return isDeadly;
+    }
+
+    @Override
+    public void collideWithPlayer(PlayerScript playerScript) {
+        playerScript.die();
     }
 
     public void setIsDeadly(boolean isDeadly){
