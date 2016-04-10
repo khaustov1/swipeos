@@ -12,7 +12,7 @@ public class CameraManager {
     private boolean isMovingNow;
     private boolean isMovingBack;
     private float moveToCoordinate = 0f;
-    private float movingSpeed = 0f;
+    private float movingSpeed = 230f;
 
     public CameraManager(OrthographicCamera camera, GameLoader gameLoader){
         this.camera = camera;
@@ -28,18 +28,22 @@ public class CameraManager {
 
     public void updateCamera(float delta){
         if(!stop) {
+            if(Math.abs(camera.position.y - gameLoader.getPlayerY()) > 200)
+                movingSpeed = 500f;
             if (isMovingNow) {
                 if (isMovingBack) {
                     if (camera.position.y <= moveToCoordinate) {
                         isMovingNow = false;
+                        movingSpeed = 230f;
                     } else {
-                        camera.position.y -= 230 * delta;
+                        camera.position.y -= movingSpeed * delta;
                     }
                 } else {
                     if (camera.position.y >= moveToCoordinate) {
                         isMovingNow = false;
+                        movingSpeed = 230f;
                     } else {
-                        camera.position.y += 230 * delta;
+                        camera.position.y += movingSpeed * delta;
                     }
                 }
             } else {
