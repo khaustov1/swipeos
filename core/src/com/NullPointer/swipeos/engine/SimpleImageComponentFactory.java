@@ -9,8 +9,6 @@ import com.uwsoft.editor.renderer.data.MainItemVO;
 import com.uwsoft.editor.renderer.data.ProjectInfoVO;
 import com.uwsoft.editor.renderer.data.ResolutionEntryVO;
 import com.uwsoft.editor.renderer.data.SimpleImageVO;
-import com.uwsoft.editor.renderer.factory.*;
-import com.uwsoft.editor.renderer.factory.component.*;
 import com.uwsoft.editor.renderer.resources.IResourceRetriever;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 

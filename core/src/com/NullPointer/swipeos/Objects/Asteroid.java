@@ -30,10 +30,6 @@ public class Asteroid extends GameObject{
         shape = new Shape<Circle>(asteroidCircle);
     }
 
-    public Circle getAsteroidCircle(){
-        return asteroidCircle;
-    }
-
     public void setX(float x){
         transformComponent.x = x;
         asteroidCircle.setX(x);

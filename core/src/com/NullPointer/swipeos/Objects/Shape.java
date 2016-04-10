@@ -12,7 +12,7 @@ public class Shape<T> {
     private boolean isCircle;
     private boolean isRectangle;
 
-    Shape(T shape){
+    public Shape(T shape){
         currentShape = shape;
         if(((Class<T>) currentShape.getClass()).equals(Rectangle.class)){
             isRectangle = true;

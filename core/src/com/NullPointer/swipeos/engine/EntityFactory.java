@@ -49,20 +49,20 @@ public class EntityFactory {
     public World world;
     public IResourceRetriever rm = null;
 
-    private com.uwsoft.editor.renderer.factory.component.ComponentFactory compositeComponentFactory;
+    private CompositeComponentFactory compositeComponentFactory;
     private com.uwsoft.editor.renderer.factory.component.ComponentFactory lightComponentFactory;
     private com.uwsoft.editor.renderer.factory.component.ComponentFactory particleEffectComponentFactory;
     private SimpleImageComponentFactory simpleImageComponentFactory;
-    private com.uwsoft.editor.renderer.factory.component.ComponentFactory spriteComponentFactory;
+    private SpriteComponentFactory spriteComponentFactory;
     private com.uwsoft.editor.renderer.factory.component.ComponentFactory spriterComponentFactory;
     private com.uwsoft.editor.renderer.factory.component.ComponentFactory labelComponentFactory;
-    private com.uwsoft.editor.renderer.factory.component.ComponentFactory ninePatchComponentFactory;
+    private NinePatchComponentFactory ninePatchComponentFactory;
 
     private HashMap<Integer, com.uwsoft.editor.renderer.factory.component.ComponentFactory> externalFactories = new HashMap<Integer, com.uwsoft.editor.renderer.factory.component.ComponentFactory>();
 
     private HashMap<Integer, Entity> entities = new HashMap<Integer, Entity>();
 
-    public com.uwsoft.editor.renderer.factory.component.ComponentFactory getCompositeComponentFactory() {
+    public CompositeComponentFactory getCompositeComponentFactory() {
         return compositeComponentFactory;
     }
 
