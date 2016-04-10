@@ -13,6 +13,7 @@ import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.StartStageScript;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Rectangle;
@@ -116,12 +117,12 @@ public class LevelLoader {
 
         for(Entity stageEntity : gameLoader.getGame().mainSceneLoader.getEngine().getEntities()){
             TransformComponent entityTransformComponent = stageEntity.getComponent(TransformComponent.class);
-            MainItemComponent entityMainItemComponent = stageEntity.getComponent(MainItemComponent.class);
+            MainItemComponent mainItemComponent = stageEntity.getComponent(MainItemComponent.class);
             if(entityTransformComponent.x > levelStartX && entityTransformComponent.x < levelEndX){
-                entityMainItemComponent.visible = true;
+                mainItemComponent.visible = false;
             }
             else {
-                entityMainItemComponent.visible = false;
+                mainItemComponent.visible = false;
             }
         }
     }

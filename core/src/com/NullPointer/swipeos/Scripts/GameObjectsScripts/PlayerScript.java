@@ -83,7 +83,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onUp() {
-                if (!isCollidingNow && !gameLoader.isPaused()) {
+                if (!isCollidingNow &&
+                        !gameLoader.isPaused() && isAlive()) {
                     playerSpeed.y += 180;
                     playerSpeed.x = 0;
                     isY_AxisNegative = false;
@@ -92,7 +93,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onRight() {
-                if (!isCollidingNow && !gameLoader.isPaused()) {
+                if (!isCollidingNow &&
+                        !gameLoader.isPaused() && isAlive()) {
                     playerSpeed.x += 180;
                     playerSpeed.y = 0;
                     isX_AxisNegative = false;
@@ -101,7 +103,8 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onLeft() {
-                if (!isCollidingNow && !gameLoader.isPaused()) {
+                if (!isCollidingNow &&
+                    !gameLoader.isPaused() && isAlive()) {
                     playerSpeed.x -= 180;
                     playerSpeed.y = 0;
                     isX_AxisNegative = true;
@@ -110,11 +113,18 @@ public class PlayerScript implements IScript {
 
             @Override
             public void onDown() {
-                if (!isCollidingNow && !gameLoader.isPaused()) {
+                if (!isCollidingNow &&
+                        !gameLoader.isPaused() && isAlive()) {
                     playerSpeed.y -= 180;
                     playerSpeed.x = 0;
                     isY_AxisNegative = true;
                 }
+            }
+
+            @Override
+            public void onTap() {
+                playerSpeed.y = 0;
+                playerSpeed.x = 0;
             }
         }));
     }
@@ -204,11 +214,12 @@ public class PlayerScript implements IScript {
 
         SpriteAnimationVO spriteAnimationVO = new SpriteAnimationVO();
         spriteAnimationVO.loadFromEntity(deadEntity);
-        spriteAnimationVO.x = playerCircle.x;
-        spriteAnimationVO.y = playerCircle.y;
+        spriteAnimationVO.x = playerCircle.x - 50;
+        spriteAnimationVO.y = playerCircle.y - 50;
         spriteAnimationVO.layerName = "popup";
-        spriteAnimationVO.scaleX = 3;
-        spriteAnimationVO.scaleY = 3;
+        spriteAnimationVO.scaleX = 0.73f;
+        spriteAnimationVO.scaleY = 0.73f;
+        spriteAnimationVO.playMode = 0;
         deathAnimationEntity = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
                 gameLoader.getGame().mainSceneLoader.getRoot(), spriteAnimationVO);
         gameLoader.getGame().mainSceneLoader.getEngine().addEntity(deathAnimationEntity);
@@ -224,7 +235,7 @@ public class PlayerScript implements IScript {
         isAlive = true;
         gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(deathAnimationEntity);
         setPlayerСoordinates(getGameLoader().getLevelXStartCoordinate(),
-               45f);
+                45f);
         getGameLoader().getCameraManager().start();
         Timer.instance().clear();
     }

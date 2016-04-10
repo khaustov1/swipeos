@@ -14,6 +14,8 @@ public class DirectionGestureDetector extends GestureDetector {
         void onUp();
 
         void onDown();
+
+        void onTap();
     }
 
     public DirectionGestureDetector(DirectionListener directionListener) {
@@ -25,6 +27,12 @@ public class DirectionGestureDetector extends GestureDetector {
 
         public DirectionGestureListener(DirectionListener directionListener){
             this.directionListener = directionListener;
+        }
+
+        @Override
+        public boolean tap (float x, float y, int count, int button) {
+            directionListener.onTap();
+            return super.tap(x,y,count,button);
         }
 
         @Override

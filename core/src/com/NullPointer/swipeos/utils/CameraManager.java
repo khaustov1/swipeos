@@ -45,11 +45,11 @@ public class CameraManager {
             } else {
                 if (gameLoader.getPlayerY() < gameLoader.getCameraStopY() &&
                         gameLoader.getPlayerY() > 320f) {
-                    if (gameLoader.getPlayerY() > camera.position.y + 150f) {
+                    if (gameLoader.getPlayerY() > camera.position.y + 100f) {
                         moveToCoordinate = gameLoader.getPlayerY();
                         isMovingNow = true;
                         isMovingBack = false;
-                    } else if (gameLoader.getPlayerY() < camera.position.y - 150f) {
+                    } else if (gameLoader.getPlayerY() < camera.position.y - 100f) {
                         moveToCoordinate = gameLoader.getPlayerY();
                         isMovingNow = true;
                         isMovingBack = true;
