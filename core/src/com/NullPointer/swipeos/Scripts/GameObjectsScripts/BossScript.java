@@ -14,6 +14,9 @@ import com.uwsoft.editor.renderer.data.SpriteAnimationVO;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +30,8 @@ public class BossScript extends GameObject implements IScript {
     TransformComponent transformComponent;
     DimensionsComponent dimensionsComponent;
 
+    List<BossChildScript> childList = new ArrayList<BossChildScript>();
+
     GameLoader gameLoader;
 
     float circleXdifferenece = 0f;
@@ -35,6 +40,8 @@ public class BossScript extends GameObject implements IScript {
 
     float bossSpeed = 50f;
     boolean back;
+
+    int health = 5;
 
 
     Timer timer = new Timer();
@@ -71,6 +78,15 @@ public class BossScript extends GameObject implements IScript {
     @Override
     public void act(float delta) {
         moveBoss(delta);
+
+        Iterator<BossChildScript> iter = childList.iterator();
+        while(iter.hasNext()){
+            BossChildScript child = iter.next();
+            if(bossCircle.overlaps((Circle)child.getShape().getCurrentShape()))
+            {
+                child.collideWithBoss(this, iter);
+            }
+        }
     }
 
     @Override
@@ -134,7 +150,7 @@ public class BossScript extends GameObject implements IScript {
 
             spriteAnimationVO.loadFromEntity(childAnimationExampleEntity);
             spriteAnimationVO.x = transformComponent.x + circleXdifferenece;
-            spriteAnimationVO.y = transformComponent.y;
+            spriteAnimationVO.y = bossCircle.y - 185;
             spriteAnimationVO.layerName = "popup";
             spriteAnimationVO.playMode = 2;
             bossChild = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
@@ -142,7 +158,8 @@ public class BossScript extends GameObject implements IScript {
             gameLoader.getGame().mainSceneLoader.getEngine().addEntity(bossChild);
             bossChildScript = new BossChildScript(false,
                     gameLoader.getGame().mainSceneLoader.engine, bossChild,
-                    gameLoader.getLevelLoader().getGameObjectList());
+                    gameLoader.getLevelLoader().getGameObjectList(), childList);
+            childList.add(bossChildScript);
 
         }
         else {
@@ -158,7 +175,7 @@ public class BossScript extends GameObject implements IScript {
             gameLoader.getGame().mainSceneLoader.getEngine().addEntity(bossChild);
             bossChildScript = new BossChildScript(true,
                     gameLoader.getGame().mainSceneLoader.engine, bossChild,
-                    gameLoader.getLevelLoader().getGameObjectList());
+                    gameLoader.getLevelLoader().getGameObjectList(), childList);
         }
         scriptComponent.addScript(bossChildScript);
         bossChild.add(scriptComponent);
@@ -169,4 +186,15 @@ public class BossScript extends GameObject implements IScript {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
+
+    public void getDamage(){
+        --health;
+        if(health <= 0){
+            //bossEntity.remove(ScriptComponent.class);
+            //gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(bossEntity);
+            //gameObjectList.remove(this);
+        }
+    }
+
+
 }

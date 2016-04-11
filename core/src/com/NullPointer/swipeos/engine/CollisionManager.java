@@ -38,19 +38,23 @@ public class CollisionManager {
 
         } else {
             for (GameObject gameObject : levelLoader.getGameObjectList()) {
-                if(gameObject.getShape().isCircle()) {
-                    if (Intersector.overlaps(playerCircle, (Circle) gameObject.getShape().getCurrentShape())) {
-                        playerScript.startCollision();
-                        gameObject.collideWithPlayer(playerScript);
-                        break;
+                try {
+                    if (gameObject.getShape().isCircle()) {
+                        if (Intersector.overlaps(playerCircle, (Circle) gameObject.getShape().getCurrentShape())) {
+                            playerScript.startCollision();
+                            gameObject.collideWithPlayer(playerScript);
+                            break;
+                        }
+                    } else if (gameObject.getShape().isRectangle()) {
+                        if (Intersector.overlaps(playerCircle, (Rectangle) gameObject.getShape().getCurrentShape())) {
+                            playerScript.startCollision();
+                            gameObject.collideWithPlayer(playerScript);
+                            break;
+                        }
                     }
                 }
-                else if(gameObject.getShape().isRectangle()){
-                    if (Intersector.overlaps(playerCircle, (Rectangle) gameObject.getShape().getCurrentShape())) {
-                        playerScript.startCollision();
-                        gameObject.collideWithPlayer(playerScript);
-                        break;
-                    }
+                catch (Exception e){
+                    System.out.print(e.toString());
                 }
             }
             //Коллизия закончилась
