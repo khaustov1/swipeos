@@ -37,8 +37,8 @@ public class Portal extends GameObject {
 
     @Override
     public void setY(float y) {
-        portalCircle.y = y;
-        portalScript.setY(y+radius);
+        portalCircle.y = y+radius;
+        portalScript.setY(y);
     }
 
     @Override
