@@ -57,6 +57,7 @@ public abstract class ComponentFactory {
         createMainItemComponent(entity, vo, entityType);
         createTransformComponent(entity, vo, dimensionsComponent);
         createTintComponent(entity, vo);
+        createZIndexComponent(entity, vo);
         createMeshComponent(entity, vo);
         createPhysicsComponents(entity, vo);
         createShaderComponent(entity, vo);

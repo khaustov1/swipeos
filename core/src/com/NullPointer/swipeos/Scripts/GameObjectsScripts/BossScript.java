@@ -2,11 +2,13 @@ package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.NullPointer.swipeos.Objects.GameObject;
 import com.NullPointer.swipeos.Objects.Shape;
+import com.NullPointer.swipeos.engine.EntityFactory;
 import com.NullPointer.swipeos.utils.GameLoader;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
+import com.uwsoft.editor.renderer.components.ScriptComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.data.SpriteAnimationVO;
 import com.uwsoft.editor.renderer.scripts.IScript;
@@ -31,28 +33,26 @@ public class BossScript extends GameObject implements IScript {
     float circleYdifference = 0f;
     float from, to;
 
-    float bossSpeed = 30f;
+    float bossSpeed = 50f;
     boolean back;
 
 
     Timer timer = new Timer();
 
-    public BossScript(GameLoader gameLoader){
+    public BossScript(GameLoader gameLoader, Entity entity){
         this.gameLoader = gameLoader;
-    }
-
-    @Override
-    public void init(Entity entity) {
         bossEntity = entity;
-        transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
-        dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
+        transformComponent = ComponentRetriever.get(bossEntity, TransformComponent.class);
+        dimensionsComponent = ComponentRetriever.get(bossEntity, DimensionsComponent.class);
+        dimensionsComponent.width = dimensionsComponent.width*3;
+        dimensionsComponent.height = dimensionsComponent.height*3;
         circleXdifferenece = dimensionsComponent.width/2;
         circleYdifference = dimensionsComponent.height/2;
 
         bossCircle = new Circle(transformComponent.x + circleXdifferenece,
                 transformComponent.y + circleYdifference, circleYdifference);
-        from = transformComponent.x - 100;
-        to = transformComponent.x + 100;
+        from = transformComponent.x - circleXdifferenece;
+        to = transformComponent.x - circleXdifferenece + 100;
 
         shape = new Shape<Circle>(bossCircle);
 
@@ -60,7 +60,12 @@ public class BossScript extends GameObject implements IScript {
             public void run() {
                 spawnChild();
             }
-        }, 0, 60 * 1000);
+        }, 3*1000, 5 * 1000);
+    }
+
+    @Override
+    public void init(Entity entity) {
+
     }
 
     @Override
@@ -118,22 +123,46 @@ public class BossScript extends GameObject implements IScript {
 
     private void spawnChild(){
         int chance = getRandomNumberInRange(0, 10);
+        Entity childAnimationExampleEntity;
+        Entity bossChild;
+        SpriteAnimationVO spriteAnimationVO = new SpriteAnimationVO();
+        ScriptComponent scriptComponent = new ScriptComponent();
+        BossChildScript bossChildScript;
         if(chance >= 7) {
-            Entity childAnimationExampleEntity = gameLoader.getItemWrapper().getChild("player").getEntity();
 
-            SpriteAnimationVO spriteAnimationVO = new SpriteAnimationVO();
+            childAnimationExampleEntity = gameLoader.getItemWrapper().getChild("player").getEntity();
+
             spriteAnimationVO.loadFromEntity(childAnimationExampleEntity);
-            spriteAnimationVO.x = transformComponent.x;
-            spriteAnimationVO.y = transformComponent.y - 50;
+            spriteAnimationVO.x = transformComponent.x + circleXdifferenece;
+            spriteAnimationVO.y = transformComponent.y;
             spriteAnimationVO.layerName = "popup";
             spriteAnimationVO.playMode = 2;
-            Entity bossChild = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
+            bossChild = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
                     gameLoader.getGame().mainSceneLoader.getRoot(), spriteAnimationVO);
             gameLoader.getGame().mainSceneLoader.getEngine().addEntity(bossChild);
-        }
-        else {
+            bossChildScript = new BossChildScript(false,
+                    gameLoader.getGame().mainSceneLoader.engine, bossChild,
+                    gameLoader.getLevelLoader().getGameObjectList());
 
         }
+        else {
+            childAnimationExampleEntity = gameLoader.getItemWrapper().getChild("boss").getEntity();
+
+            spriteAnimationVO.loadFromEntity(childAnimationExampleEntity);
+            spriteAnimationVO.x = transformComponent.x + circleXdifferenece;
+            spriteAnimationVO.y = transformComponent.y;
+            spriteAnimationVO.layerName = "popup";
+            spriteAnimationVO.playMode = 2;
+            bossChild = gameLoader.getGame().mainSceneLoader.entityFactory.createEntity(
+                    gameLoader.getGame().mainSceneLoader.getRoot(), spriteAnimationVO);
+            gameLoader.getGame().mainSceneLoader.getEngine().addEntity(bossChild);
+            bossChildScript = new BossChildScript(true,
+                    gameLoader.getGame().mainSceneLoader.engine, bossChild,
+                    gameLoader.getLevelLoader().getGameObjectList());
+        }
+        scriptComponent.addScript(bossChildScript);
+        bossChild.add(scriptComponent);
+        gameLoader.getLevelLoader().getGameObjectList().add(bossChildScript);
     }
 
     private static int getRandomNumberInRange(int min, int max) {

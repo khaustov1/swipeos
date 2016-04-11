@@ -66,6 +66,13 @@ public class GameLoader {
                 sceneToLoad = "levelPack2";
                 isNeedToLoadScene = true;
                 break;
+            case 7:
+                currentLevel = 10;
+                levelLoader.loadLevel(currentLevel);
+                playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
+                game.cameraManager.stopMoving();
+                game.cameraManager.setCameraCoords(getLevelXStartCoordinate(), startLevelYCameraCoord);
+                break;
                 default:
                     levelLoader.loadLevel(currentLevel);
                     playerScript.setPlayerСoordinates(getLevelXStartCoordinate(), StartLevelPlayerPosition);
@@ -141,5 +148,9 @@ public class GameLoader {
 
     public ItemWrapper getItemWrapper(){
         return game.mainItemWrapper;
+    }
+
+    public LevelLoader getLevelLoader() {
+        return levelLoader;
     }
 }

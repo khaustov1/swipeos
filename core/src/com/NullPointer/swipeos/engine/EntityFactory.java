@@ -55,7 +55,7 @@ public class EntityFactory {
     private SimpleImageComponentFactory simpleImageComponentFactory;
     private SpriteComponentFactory spriteComponentFactory;
     private com.uwsoft.editor.renderer.factory.component.ComponentFactory spriterComponentFactory;
-    private com.uwsoft.editor.renderer.factory.component.ComponentFactory labelComponentFactory;
+    private LabelComponentFactory labelComponentFactory;
     private NinePatchComponentFactory ninePatchComponentFactory;
 
     private HashMap<Integer, com.uwsoft.editor.renderer.factory.component.ComponentFactory> externalFactories = new HashMap<Integer, com.uwsoft.editor.renderer.factory.component.ComponentFactory>();

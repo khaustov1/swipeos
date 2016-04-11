@@ -6,6 +6,7 @@ import com.NullPointer.swipeos.Objects.Portal;
 import com.NullPointer.swipeos.Objects.Star;
 import com.NullPointer.swipeos.Objects.Wall;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.AsteroidScript;
+import com.NullPointer.swipeos.Scripts.GameObjectsScripts.BossScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.MovingWallScript;
 import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
@@ -96,6 +97,7 @@ public class LevelLoader {
         fillLevelAsteroids(level);
         fillLevelMovingWalls(level);
         setLevelStopWall(level);
+        loadBoss(level);
         setLevelStartCoordinate(level);
         gameObjectList.addAll(asteroids);
         gameObjectList.addAll(stars);
@@ -108,6 +110,19 @@ public class LevelLoader {
         List<Entity> starList = itemWrapper.getChildrenContains("star"+level+"_");
         for(Entity star : starList){
             stars.add(new Star(star));
+        }
+    }
+
+    private void loadBoss(int level){
+        if(level != 10) {
+            return;
+        }
+        else {
+            Entity bossEntity = itemWrapper.getChild("boss").getEntity();
+            BossScript bossScript = new BossScript(gameLoader, bossEntity);
+            ScriptComponent scriptComponent = new ScriptComponent();
+            scriptComponent.addScript(bossScript);
+            bossEntity.add(scriptComponent);
         }
     }
 

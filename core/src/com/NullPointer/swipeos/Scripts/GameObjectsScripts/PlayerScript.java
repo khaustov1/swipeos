@@ -243,4 +243,8 @@ public class PlayerScript implements IScript {
     public boolean isAlive(){
         return isAlive;
     }
+
+    public Circle getPlayerCircle(){
+        return playerCircle;
+    }
 }
