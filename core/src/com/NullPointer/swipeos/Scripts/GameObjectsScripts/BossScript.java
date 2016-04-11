@@ -39,7 +39,9 @@ public class BossScript extends GameObject implements IScript {
     float from, to;
 
     float bossSpeed = 50f;
+    float bossYCoordinate = 0f;
     boolean back;
+    boolean needToCreateChild;
 
     int health = 5;
 
@@ -58,6 +60,8 @@ public class BossScript extends GameObject implements IScript {
 
         bossCircle = new Circle(transformComponent.x + circleXdifferenece,
                 transformComponent.y + circleYdifference, circleYdifference);
+        bossYCoordinate = transformComponent.y;
+
         from = transformComponent.x - circleXdifferenece;
         to = transformComponent.x - circleXdifferenece + 100;
 
@@ -65,7 +69,7 @@ public class BossScript extends GameObject implements IScript {
 
         timer.schedule(new TimerTask() {
             public void run() {
-                spawnChild();
+                setCreateChildNeeded();
             }
         }, 3*1000, 5 * 1000);
     }
@@ -86,6 +90,9 @@ public class BossScript extends GameObject implements IScript {
             {
                 child.collideWithBoss(this, iter);
             }
+        }
+        if(needToCreateChild){
+            spawnChild();
         }
     }
 
@@ -180,6 +187,7 @@ public class BossScript extends GameObject implements IScript {
         scriptComponent.addScript(bossChildScript);
         bossChild.add(scriptComponent);
         gameLoader.getLevelLoader().getGameObjectList().add(bossChildScript);
+        needToCreateChild = false;
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -189,12 +197,17 @@ public class BossScript extends GameObject implements IScript {
 
     public void getDamage(){
         --health;
-        if(health <= 0){
-            //bossEntity.remove(ScriptComponent.class);
-            //gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(bossEntity);
+        if(health <= 4){
+            bossEntity.remove(ScriptComponent.class);
+            gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(bossEntity);
+            timer.cancel();
+            gameLoader.getLevelLoader().getLevelPortal().setY(bossYCoordinate);
             //gameObjectList.remove(this);
         }
     }
 
+    public void setCreateChildNeeded(){
+        needToCreateChild = true;
+    }
 
 }

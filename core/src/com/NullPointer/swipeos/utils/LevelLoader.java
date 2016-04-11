@@ -215,11 +215,12 @@ public class LevelLoader {
         TransformComponent portalTransformComponent = portalEntity.getComponent(TransformComponent.class);
         DimensionsComponent portalDimensionComponent = portalEntity.getComponent(DimensionsComponent.class);
         float portalRadius = portalDimensionComponent.width/2;
+        PortalScript portalScript = new PortalScript();
         portal = new Portal(portalTransformComponent.x + portalRadius,
                 portalTransformComponent.y + portalRadius,
-                portalRadius);
+                portalRadius, portalScript);
 
-        itemWrapper.getChild("portal"+level).addScript(new PortalScript());
+        itemWrapper.getChild("portal"+level).addScript(portalScript);
     }
 
     private void setLevelStopWall(int level){
@@ -275,5 +276,9 @@ public class LevelLoader {
 
     public List<GameObject> getGameObjectList(){
         return gameObjectList;
+    }
+
+    public Portal getLevelPortal(){
+        return portal;
     }
 }

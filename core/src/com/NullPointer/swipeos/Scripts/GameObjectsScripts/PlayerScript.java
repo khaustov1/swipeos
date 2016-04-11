@@ -245,6 +245,7 @@ public class PlayerScript implements IScript {
     }
 
     public Circle getPlayerCircle(){
+        SpriteAnimationVO d;
         return playerCircle;
     }
 }

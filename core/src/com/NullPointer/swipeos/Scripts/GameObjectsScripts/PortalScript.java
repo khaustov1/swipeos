@@ -21,6 +21,10 @@ public class PortalScript implements IScript {
         transformComponent.scaleY = 2f;
     }
 
+    public void setY(float y){
+        transformComponent.y = y;
+    }
+
     @Override
     public void act(float delta) {
         transformComponent.rotation -= 40 *delta;
