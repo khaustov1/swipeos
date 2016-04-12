@@ -2,11 +2,9 @@ package com.NullPointer.swipeos.Scripts.GameObjectsScripts;
 
 import com.NullPointer.swipeos.Objects.GameObject;
 import com.NullPointer.swipeos.Objects.Shape;
-import com.NullPointer.swipeos.engine.EntityFactory;
 import com.NullPointer.swipeos.utils.GameLoader;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Rectangle;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.ScriptComponent;
 import com.uwsoft.editor.renderer.components.TransformComponent;
@@ -144,6 +142,7 @@ public class BossScript extends GameObject implements IScript {
         }
     }
 
+    //Сделал создание в основном потоке, чтобы не крашилось
     private void spawnChild(){
         int chance = getRandomNumberInRange(0, 10);
         Entity childAnimationExampleEntity;
@@ -197,7 +196,7 @@ public class BossScript extends GameObject implements IScript {
 
     public void getDamage(){
         --health;
-        if(health <= 4){
+        if(health <= 0){
             bossEntity.remove(ScriptComponent.class);
             gameLoader.getGame().mainSceneLoader.getEngine().removeEntity(bossEntity);
             timer.cancel();
@@ -209,5 +208,4 @@ public class BossScript extends GameObject implements IScript {
     public void setCreateChildNeeded(){
         needToCreateChild = true;
     }
-
 }

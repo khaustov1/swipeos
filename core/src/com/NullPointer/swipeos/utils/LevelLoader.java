@@ -12,14 +12,12 @@ import com.NullPointer.swipeos.Scripts.NextLevelButtonScript;
 import com.NullPointer.swipeos.Scripts.GameObjectsScripts.PortalScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.BackGroundScript;
 import com.NullPointer.swipeos.Scripts.mainMenu.PlayButtonScript;
-import com.NullPointer.swipeos.Scripts.mainMenu.StartStageScript;
+import com.NullPointer.swipeos.Scripts.mainMenu.StartLevelScript;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Logger;
 import com.uwsoft.editor.renderer.components.DimensionsComponent;
 import com.uwsoft.editor.renderer.components.MainItemComponent;
 import com.uwsoft.editor.renderer.components.NodeComponent;
@@ -30,10 +28,7 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import sun.rmi.runtime.Log;
 
 /**
  * Created by Khaustov on 04.01.16.
@@ -48,6 +43,7 @@ public class LevelLoader {
     private Music menuMusic;
     private List<Asteroid> asteroids = new ArrayList<Asteroid>();
     private List<GameObject> gameObjectList = new ArrayList<GameObject>();
+    private int selectedStage;
 
 
     public LevelLoader(com.NullPointer.swipeos.engine.ItemWrapper itemWrapper, GameLoader gameLoader)
@@ -72,13 +68,23 @@ public class LevelLoader {
         dustTransformComponent.scaleY = 1.5f;
         dustTransformComponent.scaleX = 1.5f;
 
-        itemWrapper.getChild("playButton").addScript(new PlayButtonScript(gameLoader, playButtonRectangle, playButtonEntity));
+        itemWrapper.getChild("playButton").addScript(new PlayButtonScript(gameLoader, playButtonEntity,
+                992f, 0, false));
         itemWrapper.getChild("bg").addScript(new BackGroundScript());
         itemWrapper.getChild("bg1").addScript(new BackGroundScript());
+        itemWrapper.getChild("bg2").addScript(new BackGroundScript());
         Entity loadStage1Entity = itemWrapper.getChild("stage1Button").getEntity();
-        itemWrapper.getChild("stage1Button").addScript(new StartStageScript(gameLoader, loadStage1Entity, 1));
+        itemWrapper.getChild("stage1Button").addScript(new PlayButtonScript(gameLoader, loadStage1Entity,
+                -494f, 1, true));
         Entity loadStage2Entity = itemWrapper.getChild("stage2Button").getEntity();
-        itemWrapper.getChild("stage2Button").addScript(new StartStageScript(gameLoader, loadStage2Entity, 2));
+        itemWrapper.getChild("stage2Button").addScript(new PlayButtonScript(gameLoader, loadStage2Entity,
+                -494, 2, true));
+        for(int i = 1; i < 11; i++){
+            Entity currentEntity = itemWrapper.getChild(i + "_").getEntity();
+            ScriptComponent scriptComponent = new ScriptComponent();
+            scriptComponent.addScript(new StartLevelScript(gameLoader, currentEntity, i));
+            currentEntity.add(scriptComponent);
+        }
         menuMusic = Gdx.audio.newMusic(Gdx.files.internal("Calm.mp3"));
         menuMusic.setLooping(true);
         menuMusic.play();
@@ -280,5 +286,13 @@ public class LevelLoader {
 
     public Portal getLevelPortal(){
         return portal;
+    }
+
+    public void setSelectedStage(int stage){
+        this.selectedStage = stage;
+    }
+
+    public int getSelectedStage(){
+        return this.selectedStage;
     }
 }
