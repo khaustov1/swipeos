@@ -69,16 +69,23 @@ public class LevelLoader {
         dustTransformComponent.scaleX = 1.5f;
 
         itemWrapper.getChild("playButton").addScript(new PlayButtonScript(gameLoader, playButtonEntity,
-                992f, 0, false));
+                992f, 0, false, true));
         itemWrapper.getChild("bg").addScript(new BackGroundScript());
         itemWrapper.getChild("bg1").addScript(new BackGroundScript());
         itemWrapper.getChild("bg2").addScript(new BackGroundScript());
+
+        Entity backButtonLevelsEntity = itemWrapper.getChild("back_levels").getEntity();
+        itemWrapper.getChild("back_levels").addScript(new PlayButtonScript(gameLoader, backButtonLevelsEntity,
+                992f, 0, false, false));
+        Entity backButtonStages = itemWrapper.getChild("back_stages").getEntity();
+        itemWrapper.getChild("back_stages").addScript(new PlayButtonScript(gameLoader, backButtonStages,
+                180f, 0, false, false));
         Entity loadStage1Entity = itemWrapper.getChild("stage1Button").getEntity();
         itemWrapper.getChild("stage1Button").addScript(new PlayButtonScript(gameLoader, loadStage1Entity,
-                -494f, 1, true));
+                -494f, 1, true, false));
         Entity loadStage2Entity = itemWrapper.getChild("stage2Button").getEntity();
         itemWrapper.getChild("stage2Button").addScript(new PlayButtonScript(gameLoader, loadStage2Entity,
-                -494, 2, true));
+                -494, 2, true, false));
         for(int i = 1; i < 11; i++){
             Entity currentEntity = itemWrapper.getChild(i + "_").getEntity();
             ScriptComponent scriptComponent = new ScriptComponent();

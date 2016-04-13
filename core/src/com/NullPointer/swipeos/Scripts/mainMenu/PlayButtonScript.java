@@ -20,7 +20,7 @@ public class PlayButtonScript implements IScript{
     private Entity entity;
     private Rectangle buttonRectangle;
     private int stage;
-    private boolean isResizing;
+    private boolean isResizing, isRotating;
     TransformComponent transformComponent;
     DimensionsComponent dimensionsComponent;
     private float increment = 0.25f;
@@ -32,7 +32,7 @@ public class PlayButtonScript implements IScript{
 
 
     public PlayButtonScript(GameLoader gameLoader,  Entity entity, float moveTo,
-                            int stage, boolean resizing){
+                            int stage, boolean resizing, boolean isRotating){
         this.gameLoader = gameLoader;
         this.entity = entity;
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
@@ -43,6 +43,7 @@ public class PlayButtonScript implements IScript{
         this.moveTo = moveTo;
         this.stage = stage;
         this.isResizing = resizing;
+        this.isRotating = isRotating;
 
         startWidth = dimensionsComponent.width;
         center.x = transformComponent.x + dimensionsComponent.width/2;
@@ -55,14 +56,16 @@ public class PlayButtonScript implements IScript{
 
     @Override
     public void act(float delta) {
-        transformComponent.rotation += 20 * delta;
+        if(isRotating) {
+            transformComponent.rotation += 20 * delta;
+        }
         if(isResizing){
             resize();
         }
         if(Gdx.input.justTouched()){
             Vector3 pos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             gameLoader.getCameraManager().getCamera().unproject(pos);
-            if(buttonRectangle.contains(pos.x,pos.y)){
+            if(buttonRectangle.contains(pos.x, pos.y)){
                 for(int i = 1; i < 11; i++){
                     Entity labelEntity = gameLoader.getGame().mainItemWrapper.getChild("label"+i).getEntity();
                     LabelComponent labelComponent = labelEntity.getComponent(LabelComponent.class);

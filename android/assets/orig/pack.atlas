@@ -269,6 +269,14 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+arrow
+  rotate: false
+  xy: 1788, 146
+  size: 256, 256
+  split: 0, 0, 0, 0
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
 backForPopUp
   rotate: false
   xy: 1084, 2
@@ -303,13 +311,6 @@ hole-vortex
   xy: 1084, 404
   size: 800, 800
   orig: 800, 800
-  offset: 0, 0
-  index: -1
-portalimg
-  rotate: false
-  xy: 1788, 146
-  size: 256, 256
-  orig: 256, 256
   offset: 0, 0
   index: -1
 
@@ -388,7 +389,7 @@ filter: Linear,Linear
 repeat: none
 asteroid
   rotate: false
-  xy: 1050, 1458
+  xy: 1308, 1716
   size: 221, 206
   orig: 221, 206
   offset: 0, 0
@@ -421,9 +422,16 @@ fonetworight
   orig: 260, 1920
   offset: 0, 0
   index: -1
-stargold256
+portalimg
   rotate: false
   xy: 1050, 1666
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+stargold256
+  rotate: false
+  xy: 1050, 1408
   size: 256, 256
   split: 0, 0, 0, 0
   orig: 256, 256
